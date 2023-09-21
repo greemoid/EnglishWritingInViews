@@ -8,15 +8,54 @@
     android:background="@color/black_background"
     tools:context=".presentation.MainFragment">
 
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_questions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/question_item_layout"
-        tools:itemCount="50"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_chatbot"
+        tools:listitem="@layout/question_item_layout" />
+
+
+    <ImageButton
+        android:id="@+id/btn_strick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_fire"
+        app:layout_constraintEnd_toStartOf="@+id/btn_account"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/strick" />
+
+    <ImageButton
+        android:id="@+id/btn_chatbot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_chat"
+        app:layout_constraintEnd_toStartOf="@+id/btn_strick"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/chatbot" />
+
+    <ImageButton
+        android:id="@+id/btn_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/account" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

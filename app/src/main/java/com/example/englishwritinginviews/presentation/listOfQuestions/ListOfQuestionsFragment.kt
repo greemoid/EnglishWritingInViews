@@ -1,9 +1,13 @@
-package com.example.englishwritinginviews.presentation
+package com.example.englishwritinginviews.presentation.listOfQuestions
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.FragmentListOfQuestionsBinding
+import com.example.englishwritinginviews.presentation.EmptyViewModel
 import com.example.englishwritinginviews.presentation.core.BaseFragment
+import com.example.englishwritinginviews.presentation.core.Question
 
 
 class ListOfQuestionsFragment :
@@ -12,10 +16,29 @@ class ListOfQuestionsFragment :
     override val viewModel: EmptyViewModel by viewModels()
 
     override fun init() {
+        val adapter = QuestionListAdapter()
+        val recyclerView = binding.rvQuestions
+        recyclerView.adapter = adapter
+
+        adapter.differ.submitList(createQuestionList())
+
+        adapter.setOnItemClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("question", it)
+            findNavController().navigate(
+                R.id.action_listOfQuestionsFragment_to_answeringQuestionFragment,
+                bundle
+            )
+        }
+
+        binding.btnChatbot.setOnClickListener {
+            findNavController().navigate(R.id.action_listOfQuestionsFragment_to_chatbotFragment)
+        }
+
 
     }
 
-    fun createQuestionList(): List<Question> {
+    private fun createQuestionList(): List<Question> {
         return listOf(
             Question(
                 id = 1,
@@ -320,17 +343,12 @@ class ListOfQuestionsFragment :
         )
     }
 
-    data class Question(
-        val id: Int,
-        val text: String?,
-        val difficulty: Difficulty,
-        val isChecked: Boolean
-    )
 
-    enum class Difficulty(val color: Int, val label: String) {
-        RED(R.color.red_button, "Hard"),
-        YELLOW(R.color.yellow, "Medium"),
-        GREEN(R.color.grey_cards, "Easy")
+    //todo move it and find better colors
+    enum class Difficulty(val color: String, val label: String) {
+        RED(color = "#FF0000", label = "Hard"),
+        YELLOW(color = "#ffff00", label = "Medium"),
+        GREEN(color = "#00ff00", label = "Easy")
     }
 
 

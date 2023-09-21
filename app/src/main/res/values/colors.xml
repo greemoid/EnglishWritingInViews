@@ -15,6 +15,7 @@
     <color name="light_grey_cards">#f6f6f6</color>
     <color name="light_background">#EAEAEA</color>
     <color name="light_red_button">#ed4b3e</color>
+    <color name="hint_color">#86D5CFC0</color>
 
 
 </resources>
