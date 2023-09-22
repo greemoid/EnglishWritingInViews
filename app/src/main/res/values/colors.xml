@@ -12,6 +12,7 @@
     <color name="grey_cards">#232527</color>
     <color name="status_bar_light">#BCBCBC</color>
     <color name="white_text">#d5cfc0</color>
+    <color name="not_primary_text">#B7D5CFC0</color>
     <color name="light_grey_cards">#f6f6f6</color>
     <color name="light_background">#EAEAEA</color>
     <color name="light_red_button">#ed4b3e</color>

@@ -35,7 +35,9 @@ class ListOfQuestionsFragment :
             findNavController().navigate(R.id.action_listOfQuestionsFragment_to_chatbotFragment)
         }
 
-
+        binding.btnAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_listOfQuestionsFragment_to_accountFragment)
+        }
     }
 
     private fun createQuestionList(): List<Question> {

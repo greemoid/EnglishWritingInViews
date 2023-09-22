@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_background"
+    tools:context=".presentation.AnswerFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Your existing views go here -->
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/not_primary_text"
+            android:textSize="16sp"
+            android:text="My favorite holiday destination is the beautiful island of Bali, Indonesia. What I love most about Bali is its enchanting blend of culture, nature, and tranquility. The lush green rice terraces, pristine beaches, and vibrant coral reefs offer a breathtaking natural landscape to explore. My favorite holiday destination is the beautiful island of Bali, Indonesia. What I love most about Bali is its enchanting blend of culture, nature, and tranquility. The lush green rice terraces, pristine beaches, and vibrant coral reefs offer a breathtaking natural landscape to explore.
+
+Moreover, Bali's rich cultural heritage, including its traditional dance, art, and rituals, captivates me every time I visit. The warmth and friendliness of the Balinese people create a welcoming atmosphere that makes you feel at home.
+
+One of the highlights of Bali is its diverse cuisine, from delicious street food to gourmet restaurants. Exploring the local flavors is always a delightful experience.
+
+Bali also provides the perfect balance between relaxation and adventure. Whether I want to meditate in a serene temple or surf on the wild waves, Bali has it all.
+
+Overall, Bali's unique blend of spirituality, natural beauty, and vibrant culture makes it my favorite holiday destination, and I can't help but be drawn back to this paradise every chance I get"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressTint="@color/yellow"
+            android:layout_marginTop="8dp"
+            android:rating="3.5"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Describe your favorite holiday destination and why you like it."
+            android:textColor="@color/white_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/red_button"
+            android:text="Виправити"
+            android:textColor="@color/white_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n1. Помилка така то, спробуйте зробити так то\n"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/white_text"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

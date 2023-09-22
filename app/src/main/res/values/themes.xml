@@ -15,4 +15,9 @@
         <item name="windowSplashScreenBackground">@color/yellow</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.EnglishWritingInViews</item>
     </style>
+
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
