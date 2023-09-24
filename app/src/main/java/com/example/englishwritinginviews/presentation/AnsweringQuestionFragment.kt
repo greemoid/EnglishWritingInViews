@@ -23,21 +23,35 @@ class AnsweringQuestionFragment :
             findNavController().navigate(R.id.action_answeringQuestionFragment_to_answerFragment)
         }
 
-        binding.etAnswer.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-            }
+        binding.etAnswer.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                val text = p0.toString()
-                val wordCount = text.trim().split(Regex("\\s+")).size
-                binding.tvCounter.text = resources.getString(R.string.counter, wordCount)
-            }
-
-        })
+                override fun afterTextChanged(editableText: Editable?) {
+                    val wordCount = editableText.toString().trim().split(Regex("\\s+")).size
+                    with(binding.btnSubmit) {
+                        if (wordCount >= 35) {
+                            isEnabled = true
+                            setBackgroundColor(
+                                resources.getColor(
+                                    R.color.red_button,
+                                    resources.newTheme()
+                                )
+                            )
+                        } else {
+                            isEnabled = false
+                            setBackgroundColor(
+                                resources.getColor(
+                                    R.color.grey_cards,
+                                    resources.newTheme()
+                                )
+                            )
+                        }
+                    }
+                    binding.tvCounter.text = resources.getString(R.string.counter, wordCount)
+                }
+            })
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.FragmentAccountBinding
@@ -17,7 +18,11 @@ import java.io.IOException
 class AccountFragment :
     BaseFragment<EmptyViewModel, FragmentAccountBinding>(FragmentAccountBinding::inflate) {
     override val viewModel: EmptyViewModel by viewModels()
-    private val SELECT_IMAGE_REQUEST_CODE = 1
+
+    companion object {
+        private const val SELECT_IMAGE_REQUEST_CODE = -1
+    }
+
 
     override fun init() {
         val adapter = WrittenTextsAdapter()
@@ -34,7 +39,7 @@ class AccountFragment :
     private fun selectImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        startActivityForResult(intent, SELECT_IMAGE_REQUEST_CODE)
+        resultLauncher.launch(intent)
     }
 
     private fun saveImageToCacheDirectory(uri: Uri) {
@@ -61,22 +66,21 @@ class AccountFragment :
             val avatarDrawable = Drawable.createFromPath(avatarImage.absolutePath)
             avatarImageView.setImageDrawable(avatarDrawable)
         } else {
-            // If the image doesn't exist in the cache, set a default avatar
             avatarImageView.setImageResource(R.drawable.ic_account)
         }
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SELECT_IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
-            val imageUri = data?.data
-            if (imageUri != null) {
-                saveImageToCacheDirectory(imageUri)
-                setAvatarFromCache()
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == SELECT_IMAGE_REQUEST_CODE && result.resultCode == RESULT_OK) {
+
+                val imageUri = result.data?.data
+                if (imageUri != null) {
+                    saveImageToCacheDirectory(imageUri)
+                    setAvatarFromCache()
+                }
             }
         }
-    }
 
 
 }

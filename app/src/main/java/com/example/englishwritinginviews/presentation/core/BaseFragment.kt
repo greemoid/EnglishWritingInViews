@@ -32,8 +32,6 @@ abstract class BaseFragment<VM : ViewModel, VB : ViewBinding>(
 
     abstract fun init()
 
-    // i can make ext fun for navigation
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -6,7 +6,7 @@ import com.example.englishwritinginviews.databinding.FragmentChatbotBinding
 import com.example.englishwritinginviews.presentation.core.BaseFragment
 
 
-class ChatbotFragment :
+class ChatBotFragment :
     BaseFragment<EmptyViewModel, FragmentChatbotBinding>(FragmentChatbotBinding::inflate) {
     override val viewModel: EmptyViewModel by viewModels()
 

@@ -11,7 +11,7 @@ import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.QuestionItemLayoutBinding
 import com.example.englishwritinginviews.presentation.core.Question
 
-class QuestionListAdapter() :
+class QuestionListAdapter :
     RecyclerView.Adapter<QuestionListAdapter.QuestionListViewHolder>() {
     inner class QuestionListViewHolder(private val binding: QuestionItemLayoutBinding) :
         ViewHolder(binding.root) {

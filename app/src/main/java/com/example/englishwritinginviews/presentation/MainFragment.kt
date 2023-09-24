@@ -12,7 +12,7 @@ class MainFragment :
     override val viewModel: EmptyViewModel by viewModels()
 
     override fun init() {
-        binding.button2.setOnClickListener {
+        binding.btnStart.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_listOfQuestionsFragment)
         }
     }

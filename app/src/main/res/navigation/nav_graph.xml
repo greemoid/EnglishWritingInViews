@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatbotFragment"
-        android:name="com.example.englishwritinginviews.presentation.ChatbotFragment"
+        android:name="com.example.englishwritinginviews.presentation.ChatBotFragment"
         android:label="ChatbotFragment" />
     <fragment
         android:id="@+id/accountFragment"
