@@ -3,6 +3,7 @@ package com.example.englishwritinginviews
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.mockito.Mockito
 
 /**
  * Example local unit test, which will execute on the development machine (host).

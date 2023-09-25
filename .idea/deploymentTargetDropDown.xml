@@ -2,6 +2,15 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="FetchMistakesUseCaseTest">
+        <State />
+      </entry>
+      <entry key="FetchMistakesUseCaseTest.invoke with empty answer should throw an Exception">
+        <State />
+      </entry>
+      <entry key="FetchMistakesUseCaseTest.invoke with non-empty answer should call fetchMistakes and return a Flow of Mistakes">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
