@@ -7,9 +7,25 @@
 
     <fragment
         android:id="@+id/listOfQuestionsFragment"
-        android:name="com.example.englishwritinginviews.presentation.ListOfQuestionsFragment"
+        android:name="com.example.englishwritinginviews.presentation.listOfQuestions.ListOfQuestionsFragment"
         android:label="fragment_list_of_questions"
-        tools:layout="@layout/fragment_list_of_questions" />
+        tools:layout="@layout/fragment_list_of_questions" >
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_answeringQuestionFragment"
+            app:destination="@id/answeringQuestionFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_chatbotFragment"
+            app:destination="@id/chatbotFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_strikeFragment"
+            app:destination="@id/strikeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.englishwritinginviews.presentation.MainFragment"
@@ -19,4 +35,40 @@
             android:id="@+id/action_mainFragment_to_listOfQuestionsFragment"
             app:destination="@id/listOfQuestionsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/answeringQuestionFragment"
+        android:name="com.example.englishwritinginviews.presentation.AnsweringQuestionFragment"
+        android:label="fragment_answering_question"
+        tools:layout="@layout/fragment_answering_question" >
+        <argument
+            android:name="question"
+            app:argType="com.example.englishwritinginviews.presentation.core.Question" />
+        <action
+            android:id="@+id/action_answeringQuestionFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatbotFragment"
+        android:name="com.example.englishwritinginviews.presentation.ChatBotFragment"
+        android:label="ChatbotFragment" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.englishwritinginviews.presentation.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.englishwritinginviews.presentation.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/strikeFragment"
+        android:name="com.example.englishwritinginviews.presentation.StrikeFragment"
+        android:label="fragment_strike"
+        tools:layout="@layout/fragment_strike" />
+    <fragment
+        android:id="@+id/answerFragment"
+        android:name="com.example.englishwritinginviews.presentation.AnswerFragment"
+        android:label="fragment_answer"
+        tools:layout="@layout/fragment_answer" />
 </navigation>

@@ -1,15 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_background"
     tools:context=".presentation.MainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/text"
+    <ImageView
+        android:id="@+id/iv_logo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="@dimen/size_0dp"
+        android:src="@drawable/world_logo"
+        android:contentDescription="@string/logo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.500684" />
+
+    <TextView
+        android:id="@+id/tv_lear_english"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:text="@string/learn_writing"
+        android:textColor="#E9FFFFFF"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+
+    <TextView
+        android:id="@+id/tv_learning_english_is"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/learning_english"
+        android:textColor="@color/white_text"
+        android:layout_marginEnd="@dimen/size_24dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:layout_marginStart="@dimen/size_24dp"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lear_english" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:layout_marginEnd="@dimen/size_32dp"
+        android:layout_marginStart="@dimen/size_32dp"
+        android:backgroundTint="@color/red_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_learning_english_is" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

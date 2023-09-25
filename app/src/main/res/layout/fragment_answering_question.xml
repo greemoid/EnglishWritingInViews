@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout_answering"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_background"
+    tools:context=".presentation.AnsweringQuestionFragment">
+
+
+    <TextView
+        android:id="@+id/tv_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_32dp"
+        android:layout_marginEnd="@dimen/size_16dp"
+        android:textColor="@color/white_text"
+        android:textSize="@dimen/text_size_20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_rules"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_32dp"
+        android:text="@string/rules"
+        android:textColor="@color/white_text"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_question"
+        app:layout_constraintStart_toStartOf="@+id/tv_question"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question" />
+
+    <EditText
+        android:id="@+id/et_answer"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="@dimen/size_324dp"
+        android:layout_marginTop="@dimen/size_32dp"
+        android:autofillHints="no"
+        android:background="@drawable/multi_line_text_style"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/hint_writing"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/size_8dp"
+        android:textColor="@color/white_text"
+        android:textColorHint="@color/hint_color"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_rules"
+        app:layout_constraintStart_toStartOf="@+id/tv_rules"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rules" />
+
+    <TextView
+        android:id="@+id/tvCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:text="@string/counter"
+        android:textColor="@color/white_text"
+        android:textSize="@dimen/text_size_12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_answer"
+        app:layout_constraintTop_toBottomOf="@+id/et_answer" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_32dp"
+        android:backgroundTint="@color/grey_cards"
+        android:text="@string/submit"
+        android:enabled="false"
+        android:textColor="@color/white_text"
+        app:layout_constraintEnd_toEndOf="@+id/et_answer"
+        app:layout_constraintStart_toStartOf="@+id/et_answer"
+        app:layout_constraintTop_toBottomOf="@+id/tvCounter" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
