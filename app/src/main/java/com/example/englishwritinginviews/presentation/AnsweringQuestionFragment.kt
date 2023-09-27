@@ -1,5 +1,6 @@
 package com.example.englishwritinginviews.presentation
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.viewModels
@@ -20,7 +21,12 @@ class AnsweringQuestionFragment :
         binding.tvCounter.text = resources.getString(R.string.counter, 0)
 
         binding.btnSubmit.setOnClickListener {
-            findNavController().navigate(R.id.action_answeringQuestionFragment_to_answerFragment)
+            val bundle = Bundle()
+            bundle.putString("answer", binding.etAnswer.text.toString())
+            findNavController().navigate(
+                R.id.action_answeringQuestionFragment_to_answerFragment,
+                bundle
+            )
         }
 
 
@@ -32,7 +38,7 @@ class AnsweringQuestionFragment :
                 override fun afterTextChanged(editableText: Editable?) {
                     val wordCount = editableText.toString().trim().split(Regex("\\s+")).size
                     with(binding.btnSubmit) {
-                        if (wordCount >= 35) {
+                        if (wordCount >= 5) {
                             isEnabled = true
                             setBackgroundColor(
                                 resources.getColor(
@@ -53,5 +59,6 @@ class AnsweringQuestionFragment :
                     binding.tvCounter.text = resources.getString(R.string.counter, wordCount)
                 }
             })
+
     }
 }

@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_background"
-    tools:context=".presentation.AnswerFragment">
+    tools:context=".presentation.answer.AnswerFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/answer_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,12 +19,13 @@
             android:layout_width="@dimen/size_0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_16dp"
-            android:text="@string/answer_example_todelete"
             android:textColor="@color/not_primary_text"
             android:textSize="@dimen/text_size_16sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/tv_question_in_answer"
             app:layout_constraintStart_toStartOf="@+id/tv_question_in_answer"
             app:layout_constraintTop_toBottomOf="@+id/tv_question_in_answer" />
+
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -77,6 +79,18 @@
             app:layout_constraintEnd_toEndOf="@+id/tv_answer"
             app:layout_constraintStart_toStartOf="@+id/tv_answer"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_question_in_answer" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

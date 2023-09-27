@@ -4,6 +4,6 @@ import com.example.englishwritinginviews.data.entities.Mistake
 import kotlinx.coroutines.flow.Flow
 
 interface MistakesRepository {
-    suspend fun fetchMistakes(answer: String): Flow<Mistake>
+    suspend fun fetchMistakes(answer: String): Flow<WorkResult<Mistake>>
 
 }

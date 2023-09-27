@@ -1,9 +1,7 @@
 package com.example.englishwritinginviews.data
 
-import java.lang.Exception
-
-sealed class WorkResult<out R> {
-    data class Success<out T>(val data: T): WorkResult<T>()
-    data class Error(val exception: Exception): WorkResult<Nothing>()
-    object Loading : WorkResult<Nothing>()
+sealed class WorkResult<T>(val data: T? = null, val message: String? = null) {
+    class Success<T>(data: T) : WorkResult<T>(data)
+    class Error<T>(message: String, data: T? = null) : WorkResult<T>(data, message)
+    class Loading<T> : WorkResult<T>()
 }

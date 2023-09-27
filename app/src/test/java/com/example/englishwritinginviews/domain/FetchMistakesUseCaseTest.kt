@@ -1,6 +1,8 @@
 package com.example.englishwritinginviews.domain
 
 import com.example.englishwritinginviews.data.MistakesRepository
+import com.example.englishwritinginviews.data.WorkResult
+import com.example.englishwritinginviews.data.entities.Match
 import com.example.englishwritinginviews.data.entities.Mistake
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -21,7 +23,7 @@ class FetchMistakesUseCaseTest {
             val answer = "Sample answer"
             val mistakesRepository = mock(MistakesRepository::class.java)
             val useCase = FetchMistakesUseCase(mistakesRepository)
-            val mockMistake = Mistake()
+            val mockMistake = WorkResult.Success(Mistake(listOf(Match(0, "", 0, ""))))
             val mockFlow = flowOf(mockMistake)
 
             // Mock the behavior of mistakesRepository

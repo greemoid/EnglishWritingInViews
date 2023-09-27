@@ -68,7 +68,11 @@
         tools:layout="@layout/fragment_strike" />
     <fragment
         android:id="@+id/answerFragment"
-        android:name="com.example.englishwritinginviews.presentation.AnswerFragment"
+        android:name="com.example.englishwritinginviews.presentation.answer.AnswerFragment"
         android:label="fragment_answer"
-        tools:layout="@layout/fragment_answer" />
+        tools:layout="@layout/fragment_answer" >
+        <argument
+            android:name="answer"
+            app:argType="string" />
+    </fragment>
 </navigation>
