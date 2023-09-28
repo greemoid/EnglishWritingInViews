@@ -1,7 +1,7 @@
 package com.example.englishwritinginviews.di
 
-import com.example.englishwritinginviews.data.MistakesRepository
 import com.example.englishwritinginviews.domain.FetchMistakesUseCase
+import com.example.englishwritinginviews.domain.MistakesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

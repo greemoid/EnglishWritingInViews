@@ -4,6 +4,7 @@ import retrofit2.Response
 
 abstract class BaseApiResponse {
     suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): WorkResult<T> {
+
         try {
             val response = apiCall()
             if (response.isSuccessful) {
@@ -21,3 +22,6 @@ abstract class BaseApiResponse {
     private fun <T> error(errorMessage: String): WorkResult<T> =
         WorkResult.Error("Api call failed $errorMessage")
 }
+
+
+

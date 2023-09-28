@@ -18,13 +18,13 @@
             android:id="@+id/tv_answer"
             android:layout_width="@dimen/size_0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_16dp"
-            android:textColor="@color/not_primary_text"
+            android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_16sp"
+            android:layout_marginTop="@dimen/size_32dp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/tv_question_in_answer"
             app:layout_constraintStart_toStartOf="@+id/tv_question_in_answer"
-            app:layout_constraintTop_toBottomOf="@+id/tv_question_in_answer" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
         <RatingBar
@@ -32,9 +32,9 @@
             style="@style/Widget.AppCompat.RatingBar.Indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginTop="@dimen/size_32dp"
             android:progressTint="@color/yellow"
-            android:rating="3.5"
+            android:rating="5"
             app:layout_constraintEnd_toEndOf="@+id/tv_answer"
             app:layout_constraintStart_toStartOf="@+id/tv_answer"
             app:layout_constraintTop_toBottomOf="@+id/tv_answer" />
@@ -48,7 +48,7 @@
             android:layout_marginEnd="@dimen/size_16dp"
             android:text="@string/question_example_todelete"
             android:textColor="@color/white_text"
-            android:textSize="@dimen/text_size_16sp"
+            android:textSize="@dimen/text_size_20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,26 +56,14 @@
 
         <Button
             android:id="@+id/btn_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_16dp"
             android:layout_marginBottom="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_32dp"
             android:backgroundTint="@color/red_button"
             android:text="@string/edit"
             android:textColor="@color/white_text"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_answer"
-            app:layout_constraintStart_toStartOf="@+id/tv_answer"
-            app:layout_constraintTop_toBottomOf="@+id/tv_mistakes" />
-
-        <TextView
-            android:id="@+id/tv_mistakes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/mistakes_example_todelete"
-            android:textColor="@color/white_text"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_answer"
             app:layout_constraintStart_toStartOf="@+id/tv_answer"
             app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
@@ -85,11 +73,22 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+            android:visibility="invisible"
+            android:indeterminateTint="@color/red_button"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_answer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_answer" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_32dp"
+            android:text="@string/rules_for_editing"
+            android:textColor="@color/not_primary_text"
+            android:textSize="@dimen/text_size_16sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_question_in_answer"
             app:layout_constraintTop_toBottomOf="@+id/tv_question_in_answer" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

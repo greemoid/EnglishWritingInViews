@@ -24,9 +24,10 @@ class ListOfQuestionsFragment :
 
         adapter.setOnItemClickListener {
             val bundle = Bundle()
-            bundle.putSerializable("question", it)
+            bundle.putString("question", it.text)
+            bundle.putString("answer", null)
             findNavController().navigate(
-                R.id.action_listOfQuestionsFragment_to_answeringQuestionFragment,
+                R.id.action_listOfQuestionsFragment_to_questionFragment,
                 bundle
             )
         }

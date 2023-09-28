@@ -1,9 +1,8 @@
 package com.example.englishwritinginviews.domain
 
-import com.example.englishwritinginviews.data.MistakesRepository
 import com.example.englishwritinginviews.data.WorkResult
 import com.example.englishwritinginviews.data.entities.Match
-import com.example.englishwritinginviews.data.entities.Mistake
+import com.example.englishwritinginviews.data.entities.MistakeApiModel
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -23,8 +22,8 @@ class FetchMistakesUseCaseTest {
             val answer = "Sample answer"
             val mistakesRepository = mock(MistakesRepository::class.java)
             val useCase = FetchMistakesUseCase(mistakesRepository)
-            val mockMistake = WorkResult.Success(Mistake(listOf(Match(0, "", 0, ""))))
-            val mockFlow = flowOf(mockMistake)
+            val mockMistakeApiModel = WorkResult.Success(MistakeApiModel(listOf(Match(0, "", 0, ""))))
+            val mockFlow = flowOf(mockMistakeApiModel)
 
             // Mock the behavior of mistakesRepository
             Mockito.`when`(mistakesRepository.fetchMistakes(answer)).thenReturn(mockFlow)
@@ -35,7 +34,7 @@ class FetchMistakesUseCaseTest {
             // Assert
             resultFlow.collect { result ->
                 // Assert that the result is the same as the mockMistake
-                assertEquals(mockMistake, result)
+                assertEquals(mockMistakeApiModel, result)
             }
 
             // Verify that fetchMistakes was called with the expected answer

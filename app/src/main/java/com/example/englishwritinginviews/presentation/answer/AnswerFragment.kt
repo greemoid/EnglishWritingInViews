@@ -1,6 +1,7 @@
 package com.example.englishwritinginviews.presentation.answer
 
 import android.graphics.Color
+import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint
@@ -8,8 +9,9 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.englishwritinginviews.data.WorkResult
+import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.FragmentAnswerBinding
 import com.example.englishwritinginviews.presentation.core.BaseFragment
 import com.google.android.material.snackbar.Snackbar
@@ -23,37 +25,41 @@ class AnswerFragment :
     override fun init() {
         val args: AnswerFragmentArgs by navArgs()
         binding.tvAnswer.text = args.answer
+        binding.tvQuestionInAnswer.text = args.question
+        binding.btnEdit.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("answer", binding.tvAnswer.text.toString())
+            bundle.putString("question", args.question)
+            findNavController().navigate(R.id.action_answerFragment_to_questionFragment, bundle)
+        }
         fetchData(args.answer)
     }
 
     private fun fetchData(answer: String) {
         viewModel.fetchMistakeResponse(answer)
-        viewModel.response.observe(this) { response ->
-            when (response) {
-                is WorkResult.Success -> {
-                    for (i in response.data?.matches!!) {
-                        highlightText(
-                            message = i.message,
-                            offset = i.offset,
-                            length = i.length,
-                        )
-                    }
 
-                    binding.progressBar.visibility = View.INVISIBLE
-                    binding.tvAnswer.visibility = View.VISIBLE
-                }
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
 
-                is WorkResult.Error -> {
-                    binding.tvMistakes.text = response.message.toString()
-                    binding.progressBar.visibility = View.INVISIBLE
-                }
+            for (i in uiState.mistakes) {
+                highlightText(
+                    message = i.message,
+                    offset = i.offset,
+                    length = i.length
+                )
+            }
 
-                is WorkResult.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
+            binding.ratingBar.rating = uiState.rating
+
+            if (uiState.isLoading) {
+                binding.tvAnswer.visibility = View.INVISIBLE
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.tvAnswer.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.INVISIBLE
             }
         }
     }
+
 
     private fun highlightText(message: String, offset: Int, length: Int) {
 
@@ -64,9 +70,21 @@ class AnswerFragment :
             object : ClickableSpan() {
                 override fun onClick(widget: View) {
 
-                    Snackbar.make(binding.answerConstraintLayout, message, Snackbar.LENGTH_SHORT)
-                        .show()
-
+                    val snackBar =
+                        Snackbar.make(binding.answerConstraintLayout, message, Snackbar.LENGTH_LONG)
+                    with(snackBar) {
+                        setActionTextColor(
+                            resources.getColor(
+                                R.color.red_button,
+                                resources.newTheme()
+                            )
+                        )
+                        setTextColor(resources.getColor(R.color.white_text, resources.newTheme()))
+                        setAction("Close") {
+                            dismiss()
+                        }
+                        show()
+                    }
                 }
 
                 override fun updateDrawState(ds: TextPaint) {

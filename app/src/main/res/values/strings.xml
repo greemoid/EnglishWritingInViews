@@ -3,7 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="counter">%d words entered(the word count for this task is about 35)</string>
-    <string name="rules">Look at the three pictures.\n \n Write the story shown in the pictures.\n \n Write your story in 35 words or more.</string>
+    <string name="rules">Read the question above carefully.\n \nGive a detailed answer to this question.\n \nThe answer should be 35 words or more.</string>
+    <string name="rules_for_editing">Look at your mistakes.\n \nTry to understand and remember them.\n \nCorrect your text and submit it again.</string>
     <string name="hint_writing">Start typing your story…</string>
     <string name="submit">Submit</string>
     <string name="strick">strick</string>
