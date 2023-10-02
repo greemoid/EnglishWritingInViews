@@ -19,8 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AnswerFragment :
-    BaseFragment<AnswerViewModel, FragmentAnswerBinding>(FragmentAnswerBinding::inflate) {
-    override val viewModel: AnswerViewModel by viewModels()
+    BaseFragment<FragmentAnswerBinding>(FragmentAnswerBinding::inflate) {
+    private val viewModel: AnswerViewModel by viewModels()
 
     override fun init() {
         val args: AnswerFragmentArgs by navArgs()
@@ -42,9 +42,9 @@ class AnswerFragment :
 
             for (i in uiState.mistakes) {
                 highlightText(
-                    message = i.message,
-                    offset = i.offset,
-                    length = i.length
+                    message = i.textOfMistake,
+                    offset = i.startOfMistake,
+                    length = i.lengthOfMistake
                 )
             }
 

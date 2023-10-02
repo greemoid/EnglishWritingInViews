@@ -1,19 +1,15 @@
 package com.example.englishwritinginviews.presentation.listOfQuestions
 
 import android.os.Bundle
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.FragmentListOfQuestionsBinding
-import com.example.englishwritinginviews.presentation.EmptyViewModel
 import com.example.englishwritinginviews.presentation.core.BaseFragment
 import com.example.englishwritinginviews.presentation.core.Question
 
 
 class ListOfQuestionsFragment :
-    BaseFragment<EmptyViewModel, FragmentListOfQuestionsBinding>(FragmentListOfQuestionsBinding::inflate) {
-
-    override val viewModel: EmptyViewModel by viewModels()
+    BaseFragment<FragmentListOfQuestionsBinding>(FragmentListOfQuestionsBinding::inflate) {
 
     override fun init() {
         val adapter = QuestionListAdapter()

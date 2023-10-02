@@ -1,14 +1,12 @@
 package com.example.englishwritinginviews.presentation
 
 import android.webkit.WebViewClient
-import androidx.fragment.app.viewModels
 import com.example.englishwritinginviews.databinding.FragmentChatbotBinding
 import com.example.englishwritinginviews.presentation.core.BaseFragment
 
 
 class ChatBotFragment :
-    BaseFragment<EmptyViewModel, FragmentChatbotBinding>(FragmentChatbotBinding::inflate) {
-    override val viewModel: EmptyViewModel by viewModels()
+    BaseFragment<FragmentChatbotBinding>(FragmentChatbotBinding::inflate) {
 
     override fun init() {
         binding.webView.settings.javaScriptEnabled = true

@@ -1,27 +1,38 @@
 package com.example.englishwritinginviews.data
 
+import com.example.englishwritinginviews.domain.WorkResult
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
-abstract class BaseApiResponse {
-    suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): WorkResult<T> {
 
+abstract class BaseApiResponse {
+    suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): Flow<WorkResult<T>> = flow {
         try {
+            emit(WorkResult.Loading())
             val response = apiCall()
-            if (response.isSuccessful) {
+            if (response.isSuccessful && response.body() != null) {
                 val body = response.body()
                 body?.let {
-                    return WorkResult.Success(body)
+                    emit(WorkResult.Success(body))
+                } ?: run {
+                    emit(error("${response.code()} ${response.message()}"))
                 }
+            } else {
+                emit(error("${response.code()} ${response.message()}"))
             }
-            return error("${response.code()} ${response.message()}")
         } catch (e: Exception) {
-            return error(e.message ?: e.toString())
+            emit(error(e.message ?: e.toString()))
         }
     }
 
-    private fun <T> error(errorMessage: String): WorkResult<T> =
+    private fun <T> error(errorMessage: String): WorkResult.Error<T> =
         WorkResult.Error("Api call failed $errorMessage")
 }
+
+
+
+
 
 
 

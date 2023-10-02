@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VM : ViewModel, VB : ViewBinding>(
+abstract class BaseFragment<VB : ViewBinding>(
     private val inflateMethod: (LayoutInflater, ViewGroup?, Boolean) -> VB
 ) : Fragment() {
 
-    protected abstract val viewModel: VM
     private var _binding: VB? = null
     protected val binding get() = _binding!!
 

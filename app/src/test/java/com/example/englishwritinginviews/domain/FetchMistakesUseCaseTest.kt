@@ -1,6 +1,5 @@
 package com.example.englishwritinginviews.domain
 
-import com.example.englishwritinginviews.data.WorkResult
 import com.example.englishwritinginviews.data.entities.Match
 import com.example.englishwritinginviews.data.entities.MistakeApiModel
 import kotlinx.coroutines.flow.flowOf

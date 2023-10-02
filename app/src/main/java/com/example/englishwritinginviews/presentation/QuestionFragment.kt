@@ -3,7 +3,6 @@ package com.example.englishwritinginviews.presentation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.englishwritinginviews.R
@@ -12,8 +11,7 @@ import com.example.englishwritinginviews.presentation.core.BaseFragment
 
 
 class QuestionFragment :
-    BaseFragment<EmptyViewModel, FragmentQuestionBinding>(FragmentQuestionBinding::inflate) {
-    override val viewModel: EmptyViewModel by viewModels()
+    BaseFragment<FragmentQuestionBinding>(FragmentQuestionBinding::inflate) {
 
     override fun init() {
         val args: QuestionFragmentArgs by navArgs()

@@ -1,12 +1,13 @@
 package com.example.englishwritinginviews.presentation.answer
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.englishwritinginviews.data.WorkResult
-import com.example.englishwritinginviews.data.entities.Match
+import com.example.englishwritinginviews.domain.WorkResult
 import com.example.englishwritinginviews.domain.FetchMistakesUseCase
+import com.example.englishwritinginviews.domain.Mistake
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 data class AnswerUiState(
     val answer: String,
-    val mistakes: List<Match>,
+    val mistakes: List<Mistake>,
     val rating: Float,
     val isLoading: Boolean = false
 )
@@ -29,7 +30,7 @@ class AnswerViewModel @Inject constructor(
 
     fun fetchMistakeResponse(answer: String) = viewModelScope.launch {
         _uiState.value = AnswerUiState(
-            isLoading = true,
+            isLoading = false,
             answer = "",
             mistakes = emptyList(),
             rating = 0f,
@@ -38,7 +39,7 @@ class AnswerViewModel @Inject constructor(
         useCase(answer).collect { workResult ->
             when (workResult) {
                 is WorkResult.Success -> {
-                    val mistakes = workResult.data?.matches ?: emptyList()
+                    val mistakes = workResult.data ?: emptyList()
                     val rating = calculateRating(mistakes)
 
                     _uiState.value = AnswerUiState(
@@ -59,6 +60,7 @@ class AnswerViewModel @Inject constructor(
                 }
 
                 is WorkResult.Loading -> {
+                    Log.d("ASAC", "loading")
                     _uiState.value = AnswerUiState(
                         answer = "",
                         mistakes = emptyList(),
@@ -70,7 +72,7 @@ class AnswerViewModel @Inject constructor(
         }
     }
 
-    private fun calculateRating(mistakes: List<Match>): Float {
+    private fun calculateRating(mistakes: List<Mistake>): Float {
         return when (mistakes.size) {
             in 0..1 -> 5f
             in 2..3 -> 4.5f
