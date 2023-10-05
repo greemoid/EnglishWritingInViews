@@ -1,6 +1,6 @@
-package com.example.englishwritinginviews.data
+package com.example.englishwritinginviews.data.api
 
-import com.example.englishwritinginviews.data.entities.MistakeApiModel
+import com.example.englishwritinginviews.data.api.entities.MistakeApiModel
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

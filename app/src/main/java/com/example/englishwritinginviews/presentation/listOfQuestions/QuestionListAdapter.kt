@@ -9,19 +9,28 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.QuestionItemLayoutBinding
-import com.example.englishwritinginviews.presentation.core.Question
+import com.example.englishwritinginviews.domain.QuestionDomain
 
 class QuestionListAdapter :
     RecyclerView.Adapter<QuestionListAdapter.QuestionListViewHolder>() {
     inner class QuestionListViewHolder(private val binding: QuestionItemLayoutBinding) :
         ViewHolder(binding.root) {
-        fun bind(question: Question) {
+        fun bind(question: QuestionDomain) {
             with(binding) {
-                questionTextView.text = question.text
-                difficultyTextView.text = question.difficulty.label
-                val color = Color.parseColor(question.difficulty.color)
-                difficultyTextView.setTextColor(color)
-                if (question.isChecked) {
+                questionTextView.text = question.question
+                difficultyTextView.text = question.difficulty
+                /*val color = Color.parseColor(question.color)
+                difficultyTextView.setTextColor(color)*/
+
+                //todo think about colors in DB
+                val color = when (question.color) {
+                    "RED" -> "#FF0000"
+                    "YELLOW" -> "#ffff00"
+                    "GREEN" -> "#00ff00"
+                    else -> "#FFFFFF"
+                }
+                difficultyTextView.setTextColor(Color.parseColor(color))
+                if (question.isAnswered) {
                     questionImageView.setImageResource(R.drawable.ic_checked)
                 } else {
                     questionImageView.setImageResource(R.drawable.ic_unchecked)
@@ -46,21 +55,21 @@ class QuestionListAdapter :
         holder.bind(differ.currentList[position])
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<Question>() {
-        override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<QuestionDomain>() {
+        override fun areItemsTheSame(oldItem: QuestionDomain, newItem: QuestionDomain): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean {
+        override fun areContentsTheSame(oldItem: QuestionDomain, newItem: QuestionDomain): Boolean {
             return oldItem == newItem
         }
     }
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    fun setOnItemClickListener(listener: (Question) -> Unit) {
+    fun setOnItemClickListener(listener: (QuestionDomain) -> Unit) {
         onItemClickListener = listener
     }
 
-    private var onItemClickListener: ((Question) -> Unit)? = null
+    private var onItemClickListener: ((QuestionDomain) -> Unit)? = null
 }

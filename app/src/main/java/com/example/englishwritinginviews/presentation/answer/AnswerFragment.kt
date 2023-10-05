@@ -24,15 +24,20 @@ class AnswerFragment :
 
     override fun init() {
         val args: AnswerFragmentArgs by navArgs()
-        binding.tvAnswer.text = args.answer
-        binding.tvQuestionInAnswer.text = args.question
+        val question = args.question
+        binding.tvQuestionInAnswer.text = question.question
+        binding.tvAnswer.text = question.answer
         binding.btnEdit.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("answer", binding.tvAnswer.text.toString())
-            bundle.putString("question", args.question)
+            bundle.putSerializable("question", question)
             findNavController().navigate(R.id.action_answerFragment_to_questionFragment, bundle)
         }
-        fetchData(args.answer)
+
+        binding.btnDone.setOnClickListener {
+            findNavController().navigate(R.id.action_answerFragment_to_listOfQuestionsFragment)
+        }
+
+        fetchData(question.answer)
     }
 
     private fun fetchData(answer: String) {
@@ -40,6 +45,7 @@ class AnswerFragment :
 
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
 
+            // todo set error
             for (i in uiState.mistakes) {
                 highlightText(
                     message = i.textOfMistake,

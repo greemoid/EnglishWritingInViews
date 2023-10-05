@@ -1,4 +1,4 @@
-package com.example.englishwritinginviews.data.entities
+package com.example.englishwritinginviews.data.api.entities
 
 data class Match(
     val length: Int,

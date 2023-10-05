@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.englishwritinginviews.domain.WorkResult
 import com.example.englishwritinginviews.domain.FetchMistakesUseCase
 import com.example.englishwritinginviews.domain.Mistake
+import com.example.englishwritinginviews.domain.UpdateAnswerUseCase
+import com.example.englishwritinginviews.domain.WorkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,11 +23,12 @@ data class AnswerUiState(
 
 @HiltViewModel
 class AnswerViewModel @Inject constructor(
-    private val useCase: FetchMistakesUseCase
+    private val fetchMistakesUseCase: FetchMistakesUseCase
 ) : ViewModel() {
 
     private val _uiState: MutableLiveData<AnswerUiState> = MutableLiveData()
     val uiState: LiveData<AnswerUiState> = _uiState
+
 
     fun fetchMistakeResponse(answer: String) = viewModelScope.launch {
         _uiState.value = AnswerUiState(
@@ -36,7 +38,7 @@ class AnswerViewModel @Inject constructor(
             rating = 0f,
         )
 
-        useCase(answer).collect { workResult ->
+        fetchMistakesUseCase(answer).collect { workResult ->
             when (workResult) {
                 is WorkResult.Success -> {
                     val mistakes = workResult.data ?: emptyList()
@@ -60,7 +62,6 @@ class AnswerViewModel @Inject constructor(
                 }
 
                 is WorkResult.Loading -> {
-                    Log.d("ASAC", "loading")
                     _uiState.value = AnswerUiState(
                         answer = "",
                         mistakes = emptyList(),
@@ -73,6 +74,7 @@ class AnswerViewModel @Inject constructor(
     }
 
     private fun calculateRating(mistakes: List<Mistake>): Float {
+        //todo add rating to model
         return when (mistakes.size) {
             in 0..1 -> 5f
             in 2..3 -> 4.5f

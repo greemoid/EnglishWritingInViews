@@ -1,5 +1,6 @@
-package com.example.englishwritinginviews.data
+package com.example.englishwritinginviews.data.api
 
+import com.example.englishwritinginviews.data.api.ApiService
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {

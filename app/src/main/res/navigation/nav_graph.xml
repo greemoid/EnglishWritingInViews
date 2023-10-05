@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_listOfQuestionsFragment_to_questionFragment"
             app:destination="@id/questionFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -59,19 +62,19 @@
         android:name="com.example.englishwritinginviews.presentation.answer.AnswerFragment"
         android:label="fragment_answer"
         tools:layout="@layout/fragment_answer" >
-        <argument
-            android:name="answer"
-            app:argType="string" />
-        <argument
-            android:name="question"
-            app:argType="string" />
         <action
             android:id="@+id/action_answerFragment_to_questionFragment"
             app:destination="@id/questionFragment" />
+        <argument
+            android:name="question"
+            app:argType="com.example.englishwritinginviews.domain.QuestionDomain" />
+        <action
+            android:id="@+id/action_answerFragment_to_listOfQuestionsFragment"
+            app:destination="@id/listOfQuestionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionFragment"
-        android:name="com.example.englishwritinginviews.presentation.QuestionFragment"
+        android:name="com.example.englishwritinginviews.presentation.question.QuestionFragment"
         android:label="fragment_question"
         tools:layout="@layout/fragment_question" >
         <action
@@ -79,10 +82,6 @@
             app:destination="@id/answerFragment" />
         <argument
             android:name="question"
-            app:argType="string" />
-        <argument
-            android:name="answer"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="com.example.englishwritinginviews.domain.QuestionDomain" />
     </fragment>
 </navigation>

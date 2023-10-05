@@ -47,11 +47,7 @@ android {
 
 dependencies {
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    androidTestImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+
     // Room
     val roomVersion = "2.5.2"
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -89,8 +85,12 @@ dependencies {
     // Splash Screen
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    androidTestImplementation("org.mockito:mockito-core:2.21.0")
-    testImplementation("org.mockito:mockito-core:2.21.0")
+    // Testing
+    androidTestImplementation("org.mockito:mockito-core:3.10.0")
+    testImplementation("org.mockito:mockito-core:3.10.0")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    androidTestImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
 
     implementation(libs.core.ktx)

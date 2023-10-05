@@ -1,31 +1,53 @@
 package com.example.englishwritinginviews.presentation.listOfQuestions
 
 import android.os.Bundle
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.FragmentListOfQuestionsBinding
 import com.example.englishwritinginviews.presentation.core.BaseFragment
 import com.example.englishwritinginviews.presentation.core.Question
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class ListOfQuestionsFragment :
     BaseFragment<FragmentListOfQuestionsBinding>(FragmentListOfQuestionsBinding::inflate) {
+
+    private val viewModel: ListOfQuestionsViewModel by viewModels()
 
     override fun init() {
         val adapter = QuestionListAdapter()
         val recyclerView = binding.rvQuestions
         recyclerView.adapter = adapter
 
-        adapter.differ.submitList(createQuestionList())
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.questionsState.collect { list ->
+                    adapter.differ.submitList(list)
+                }
+            }
+        }
 
-        adapter.setOnItemClickListener {
+        adapter.setOnItemClickListener { question ->
             val bundle = Bundle()
-            bundle.putString("question", it.text)
-            bundle.putString("answer", null)
-            findNavController().navigate(
-                R.id.action_listOfQuestionsFragment_to_questionFragment,
-                bundle
-            )
+            bundle.putSerializable("question", question)
+            if (question.isAnswered) {
+                findNavController().navigate(
+                    R.id.action_listOfQuestionsFragment_to_answerFragment,
+                    bundle
+                )
+            } else {
+                findNavController().navigate(
+                    R.id.action_listOfQuestionsFragment_to_questionFragment,
+                    bundle
+                )
+            }
+
         }
 
         binding.btnChatbot.setOnClickListener {
@@ -37,7 +59,7 @@ class ListOfQuestionsFragment :
         }
     }
 
-    private fun createQuestionList(): List<Question> {
+   /* private fun createQuestionList(): List<Question> {
         return listOf(
             Question(
                 id = 1,
@@ -343,12 +365,11 @@ class ListOfQuestionsFragment :
     }
 
 
-    //todo move it and find better colors
     enum class Difficulty(val color: String, val label: String) {
         RED(color = "#FF0000", label = "Hard"),
         YELLOW(color = "#ffff00", label = "Medium"),
         GREEN(color = "#00ff00", label = "Easy")
     }
-
+*/
 
 }

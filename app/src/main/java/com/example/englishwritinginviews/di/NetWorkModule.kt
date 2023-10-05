@@ -1,6 +1,6 @@
 package com.example.englishwritinginviews.di
 
-import com.example.englishwritinginviews.data.ApiService
+import com.example.englishwritinginviews.data.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

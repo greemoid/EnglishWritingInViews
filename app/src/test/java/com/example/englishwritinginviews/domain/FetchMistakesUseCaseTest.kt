@@ -1,7 +1,7 @@
 package com.example.englishwritinginviews.domain
 
-import com.example.englishwritinginviews.data.entities.Match
-import com.example.englishwritinginviews.data.entities.MistakeApiModel
+import com.example.englishwritinginviews.data.api.entities.Match
+import com.example.englishwritinginviews.data.api.entities.MistakeApiModel
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals

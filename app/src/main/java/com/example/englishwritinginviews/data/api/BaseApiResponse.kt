@@ -1,4 +1,4 @@
-package com.example.englishwritinginviews.data
+package com.example.englishwritinginviews.data.api
 
 import com.example.englishwritinginviews.domain.WorkResult
 import kotlinx.coroutines.flow.Flow

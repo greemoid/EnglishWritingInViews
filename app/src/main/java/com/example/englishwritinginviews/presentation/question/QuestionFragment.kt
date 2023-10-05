@@ -1,30 +1,48 @@
-package com.example.englishwritinginviews.presentation
+package com.example.englishwritinginviews.presentation.question
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.FragmentQuestionBinding
 import com.example.englishwritinginviews.presentation.core.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class QuestionFragment :
     BaseFragment<FragmentQuestionBinding>(FragmentQuestionBinding::inflate) {
 
+    private val viewModel: QuestionViewModel by viewModels()
+
     override fun init() {
         val args: QuestionFragmentArgs by navArgs()
-        binding.tvQuestion.text = args.question
-
-        binding.etAnswer.setText(args.answer ?: "")
+        val question = args.question
+        binding.tvQuestion.text = question.question
+        binding.etAnswer.setText(question.answer)
 
         binding.tvCounter.text = resources.getString(R.string.counter, 0)
 
+
+
         binding.btnSubmit.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("answer", binding.etAnswer.text.toString())
-            bundle.putString("question", binding.tvQuestion.text.toString())
+            val answer = binding.etAnswer.text.toString()
+            viewModel.update(question.id, answer)
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.CREATED) {
+                    viewModel.stateFlow.collect {
+                        bundle.putSerializable("question", it)
+                    }
+                }
+            }
+
             findNavController().navigate(
                 R.id.action_questionFragment_to_answerFragment,
                 bundle
