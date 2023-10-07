@@ -1,13 +1,11 @@
 package com.example.englishwritinginviews.presentation.answer
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.domain.FetchMistakesUseCase
 import com.example.englishwritinginviews.domain.Mistake
-import com.example.englishwritinginviews.domain.UpdateAnswerUseCase
 import com.example.englishwritinginviews.domain.WorkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,7 +16,8 @@ data class AnswerUiState(
     val answer: String,
     val mistakes: List<Mistake>,
     val rating: Float,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isError: Boolean = false
 )
 
 @HiltViewModel
@@ -57,7 +56,8 @@ class AnswerViewModel @Inject constructor(
                         answer = workResult.message!!,
                         mistakes = emptyList(),
                         rating = 0f,
-                        isLoading = false
+                        isLoading = false,
+                        isError = true
                     )
                 }
 

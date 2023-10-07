@@ -45,7 +45,6 @@ class AnswerFragment :
 
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
 
-            // todo set error
             for (i in uiState.mistakes) {
                 highlightText(
                     message = i.textOfMistake,
@@ -55,6 +54,17 @@ class AnswerFragment :
             }
 
             binding.ratingBar.rating = uiState.rating
+
+            // todo handle errors and give to it texts
+            if (uiState.isError) {
+                binding.tvAnswer.text = uiState.answer
+                binding.tvAnswer.setTextColor(
+                    resources.getColor(
+                        R.color.red_button,
+                        context?.theme
+                    )
+                )
+            }
 
             if (uiState.isLoading) {
                 binding.tvAnswer.visibility = View.INVISIBLE

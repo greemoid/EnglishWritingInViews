@@ -24,6 +24,10 @@ class DefaultMistakesRepository @Inject constructor(
     }
 
     override fun getAllQuestions(): Flow<List<QuestionDomain>> = localDataSource.getAllQuestions()
+
+    override fun getAnsweredQuestions(): Flow<List<QuestionDomain>> =
+        localDataSource.getAnsweredQuestions()
+
     override fun updateAnswer(id: Int, answer: String, answeredAt: Long): QuestionDomain =
         localDataSource.updateAnswer(id, answer, answeredAt)
 }

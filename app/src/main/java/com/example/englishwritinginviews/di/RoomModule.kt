@@ -21,7 +21,7 @@ object RoomModule {
         Room.databaseBuilder(context, QuestionsDatabase::class.java, "questions")
             .createFromAsset("questions.db")
             .allowMainThreadQueries()
-            //.fallbackToDestructiveMigration()  i can on it when i need :(
+            //.fallbackToDestructiveMigration()  //i can on it when i need :(
             .build()
 
     @Provides

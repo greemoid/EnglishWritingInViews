@@ -46,7 +46,11 @@
         android:id="@+id/accountFragment"
         android:name="com.example.englishwritinginviews.presentation.account.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.englishwritinginviews.presentation.SettingsFragment"

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.QuestionItemLayoutBinding
 import com.example.englishwritinginviews.domain.QuestionDomain
+import com.example.englishwritinginviews.presentation.core.setDifficultyColor
 
 class QuestionListAdapter :
     RecyclerView.Adapter<QuestionListAdapter.QuestionListViewHolder>() {
@@ -19,17 +20,7 @@ class QuestionListAdapter :
             with(binding) {
                 questionTextView.text = question.question
                 difficultyTextView.text = question.difficulty
-                /*val color = Color.parseColor(question.color)
-                difficultyTextView.setTextColor(color)*/
-
-                //todo think about colors in DB
-                val color = when (question.color) {
-                    "RED" -> "#FF0000"
-                    "YELLOW" -> "#ffff00"
-                    "GREEN" -> "#00ff00"
-                    else -> "#FFFFFF"
-                }
-                difficultyTextView.setTextColor(Color.parseColor(color))
+                difficultyTextView.setDifficultyColor(question.color)
                 if (question.isAnswered) {
                     questionImageView.setImageResource(R.drawable.ic_checked)
                 } else {

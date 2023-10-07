@@ -62,6 +62,7 @@
         android:text="@string/start"
         android:layout_marginEnd="@dimen/size_32dp"
         android:layout_marginStart="@dimen/size_32dp"
+        android:textColor="@color/white_text"
         android:backgroundTint="@color/red_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewAnswer"
         android:layout_width="@dimen/size_0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_8dp"
