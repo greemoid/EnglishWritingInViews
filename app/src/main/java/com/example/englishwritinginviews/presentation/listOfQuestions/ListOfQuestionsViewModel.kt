@@ -1,10 +1,12 @@
 package com.example.englishwritinginviews.presentation.listOfQuestions
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.domain.FetchQuestionsUseCase
 import com.example.englishwritinginviews.domain.QuestionDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -23,11 +25,18 @@ class ListOfQuestionsViewModel @Inject constructor(private val useCase: FetchQue
     init {
         getQuestions()
     }
-    fun getQuestions(filterList: List<String> = emptyList()) {
+
+    fun getQuestions(filterList: Set<String> = emptySet<String>()) {
         viewModelScope.launch {
             useCase(filterList).collect { list ->
                 _questionsState.value = list
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("asac", "l canceled")
+        viewModelScope.cancel()
     }
 }

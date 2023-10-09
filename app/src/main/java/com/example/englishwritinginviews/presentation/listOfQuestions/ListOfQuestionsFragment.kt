@@ -1,7 +1,6 @@
 package com.example.englishwritinginviews.presentation.listOfQuestions
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.CompoundButton
@@ -23,7 +22,6 @@ class ListOfQuestionsFragment :
     BaseFragment<FragmentListOfQuestionsBinding>(FragmentListOfQuestionsBinding::inflate) {
 
     private val viewModel: ListOfQuestionsViewModel by viewModels()
-    private val listOfDifficulties = mutableListOf<String>()
     private val setOfDifficulties = HashSet<String>()
     private val checkedCheckBoxes = HashSet<Int>()
 
@@ -33,14 +31,14 @@ class ListOfQuestionsFragment :
         val recyclerView = binding.rvQuestions
         recyclerView.adapter = adapter
 
+
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.questionsState.collect { list ->
                     adapter.differ.submitList(list)
                 }
             }
         }
-
 
         adapter.setOnItemClickListener { question ->
             val bundle = Bundle()
@@ -69,6 +67,7 @@ class ListOfQuestionsFragment :
         }
     }
 
+
     private fun openBottomSheetDialog() {
         val dialog = BottomSheetDialog(requireContext())
         val view = layoutInflater.inflate(R.layout.bottom_sheet_filter_layout, null)
@@ -82,7 +81,6 @@ class ListOfQuestionsFragment :
             when (checkBox.id) {
                 R.id.is_easy -> {
                     if (isChecked) {
-                        listOfDifficulties.add("Easy")
                         setOfDifficulties.add("Easy")
                         checkedCheckBoxes.add(R.id.is_easy)
                     } else {
@@ -93,7 +91,6 @@ class ListOfQuestionsFragment :
 
                 R.id.is_medium -> {
                     if (isChecked) {
-                        listOfDifficulties.add("Medium")
                         setOfDifficulties.add("Medium")
                         checkedCheckBoxes.add(R.id.is_medium)
                     } else {
@@ -104,7 +101,6 @@ class ListOfQuestionsFragment :
 
                 R.id.is_hard -> {
                     if (isChecked) {
-                        listOfDifficulties.add("Hard")
                         setOfDifficulties.add("Hard")
                         checkedCheckBoxes.add(R.id.is_hard)
                     } else {
@@ -137,8 +133,7 @@ class ListOfQuestionsFragment :
 
 
         btnApply.setOnClickListener {
-            Log.d("asac", setOfDifficulties.toString())
-            viewModel.getQuestions(setOfDifficulties.toList())
+            viewModel.getQuestions(setOfDifficulties)
             dialog.dismiss()
         }
 

@@ -1,5 +1,6 @@
 package com.example.englishwritinginviews.presentation.answer
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.example.englishwritinginviews.domain.FetchMistakesUseCase
 import com.example.englishwritinginviews.domain.Mistake
 import com.example.englishwritinginviews.domain.WorkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -88,6 +90,7 @@ class AnswerViewModel @Inject constructor(
             else -> 0.5f
         }
     }
+
 
 
 }

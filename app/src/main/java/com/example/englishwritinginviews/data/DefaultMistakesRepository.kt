@@ -23,7 +23,8 @@ class DefaultMistakesRepository @Inject constructor(
             .flowOn(Dispatchers.IO).mapMatchesToMistakes()
     }
 
-    override fun getQuestions(filterList: List<String>): Flow<List<QuestionDomain>> = localDataSource.getQuestions(filterList)
+    override fun getQuestions(filterList: Set<String>): Flow<List<QuestionDomain>> =
+        localDataSource.getQuestions(filterList)
 
     override fun getAnsweredQuestions(): Flow<List<QuestionDomain>> =
         localDataSource.getAnsweredQuestions()
