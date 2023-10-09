@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 interface MistakesRepository {
     suspend fun fetchMistakes(answer: String): Flow<WorkResult<List<Mistake>>>
 
-    fun getAllQuestions(): Flow<List<QuestionDomain>>
+    fun getQuestions(filterList: List<String>): Flow<List<QuestionDomain>>
 
     fun getAnsweredQuestions(): Flow<List<QuestionDomain>>
 

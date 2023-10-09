@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Filter options submenu -->
+    <!--<item
+        android:id="@+id/menu_filter"
+        android:title="Filter"
+        android:icon="@drawable/ic_filter"
+        android:orderInCategory="100"
+        app:showAsAction="always">
+        <menu>
+
+            &lt;!&ndash; Checkbox option 1 &ndash;&gt;
+            <item
+                android:id="@+id/is_easy"
+                android:title="Easy"
+                android:checkable="true"
+                android:checked="false" />
+
+            &lt;!&ndash; Checkbox option 2 &ndash;&gt;
+            <item
+                android:id="@+id/is_medium"
+                android:title="Medium"
+                android:checkable="true"
+                android:checked="false" />
+
+            &lt;!&ndash; Checkbox option 3 &ndash;&gt;
+            <item
+                android:id="@+id/is_hard"
+                android:title="Hard"
+                android:checkable="true"
+                android:checked="false" />
+
+        </menu>
+    </item>
+-->
+</menu>

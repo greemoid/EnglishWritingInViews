@@ -11,7 +11,14 @@ import kotlinx.coroutines.flow.map
 
 class LocalDataSource(private val dao: QuestionDao) {
 
-    fun getAllQuestions(): Flow<List<QuestionDomain>> = safeFlowCall { dao.getAllQuestions() }
+    fun getQuestions(filterList: List<String>): Flow<List<QuestionDomain>> =
+        safeFlowCall {
+            if (filterList.isEmpty()) {
+                dao.getAllQuestions()
+            } else {
+                dao.getFilteredQuestions(filterList)
+            }
+        }
 
     fun getAnsweredQuestions(): Flow<List<QuestionDomain>> =
         safeFlowCall { dao.getAnsweredQuestions() }

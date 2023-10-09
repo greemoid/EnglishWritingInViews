@@ -20,14 +20,12 @@ class ListOfQuestionsViewModel @Inject constructor(private val useCase: FetchQue
         )
     val questionsState: StateFlow<List<QuestionDomain>> = _questionsState
 
-
     init {
-        getAllQuestions()
+        getQuestions()
     }
-
-    private fun getAllQuestions() {
+    fun getQuestions(filterList: List<String> = emptyList()) {
         viewModelScope.launch {
-            useCase().collect { list ->
+            useCase(filterList).collect { list ->
                 _questionsState.value = list
             }
         }

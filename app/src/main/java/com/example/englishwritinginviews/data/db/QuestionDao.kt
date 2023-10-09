@@ -12,6 +12,10 @@ interface QuestionDao {
     @Query("SELECT * FROM questions")
     fun getAllQuestions(): Flow<List<QuestionDbModel>>
 
+    @Query("SELECT * FROM questions WHERE difficulty IN (:selectedDifficulties)")
+    fun getFilteredQuestions(selectedDifficulties: List<String>): Flow<List<QuestionDbModel>>
+
+
     @Query("SELECT * FROM questions WHERE isAnswered = :isAnswered")
     fun getAnsweredQuestions(isAnswered: Boolean = true): Flow<List<QuestionDbModel>>
 
