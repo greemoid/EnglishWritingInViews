@@ -29,8 +29,13 @@ class DefaultMistakesRepository @Inject constructor(
     override fun getAnsweredQuestions(): Flow<List<QuestionDomain>> =
         localDataSource.getAnsweredQuestions()
 
-    override fun updateAnswer(id: Int, answer: String, answeredAt: Long): QuestionDomain =
-        localDataSource.updateAnswer(id, answer, answeredAt)
+    override fun updateAnswer(
+        id: Int,
+        answer: String,
+        answeredAt: Long,
+        rating: Float
+    ): QuestionDomain =
+        localDataSource.updateAnswer(id, answer, answeredAt, rating)
 }
 
 private fun Flow<WorkResult<MistakeApiModel>>.mapMatchesToMistakes(): Flow<WorkResult<List<Mistake>>> {

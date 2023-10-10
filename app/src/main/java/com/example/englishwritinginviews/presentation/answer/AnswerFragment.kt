@@ -21,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AnswerFragment :
     BaseFragment<FragmentAnswerBinding>(FragmentAnswerBinding::inflate) {
     private val viewModel: AnswerViewModel by viewModels()
+    private var rating: Float = 0.0f
 
     override fun init() {
         val args: AnswerFragmentArgs by navArgs()
@@ -34,6 +35,7 @@ class AnswerFragment :
         }
 
         binding.btnDone.setOnClickListener {
+            viewModel.update(question.id, question.answer, rating)
             findNavController().navigate(R.id.action_answerFragment_to_listOfQuestionsFragment)
         }
 
@@ -53,9 +55,10 @@ class AnswerFragment :
                 )
             }
 
-            binding.ratingBar.rating = uiState.rating
+            rating = uiState.rating
 
-            // todo handle errors and give to it texts
+            binding.ratingBar.rating = rating
+
             if (uiState.isError) {
                 binding.tvAnswer.text = uiState.answer
                 binding.tvAnswer.setTextColor(

@@ -1,12 +1,15 @@
 package com.example.englishwritinginviews.presentation.account
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.domain.FetchAnsweredQuestionsUseCase
 import com.example.englishwritinginviews.domain.QuestionDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +27,8 @@ class AccountViewModel @Inject constructor(
 
     private fun fetchQuestions() = viewModelScope.launch {
         fetchAnsweredQuestionsUseCase().collect { list ->
-            _questions.value = list
+            _questions.value = list.asReversed()
         }
     }
+
 }

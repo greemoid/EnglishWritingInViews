@@ -25,18 +25,20 @@ interface QuestionDao {
         id: Int,
         answer: String,
         isAnswered: Boolean = true,
-        answeredAt: Long
+        answeredAt: Long,
+        rating: Float
     ): QuestionDbModel {
-        updateAnswer(id, answer, isAnswered, answeredAt)
+        updateAnswer(id, answer, isAnswered, answeredAt, rating)
         return getAnswerById(id)
     }
 
-    @Query("UPDATE questions SET answer = :answer, isAnswered = :isAnswered, answeredAt = :answeredAt WHERE id = :id")
+    @Query("UPDATE questions SET answer = :answer, isAnswered = :isAnswered, answeredAt = :answeredAt, rating = :rating WHERE id = :id")
     fun updateAnswer(
         id: Int,
         answer: String,
         isAnswered: Boolean = true,
-        answeredAt: Long
+        answeredAt: Long,
+        rating: Float
     )
 
     @Query("SELECT * FROM questions where id = :id")

@@ -40,13 +40,21 @@ class AccountFragment :
             selectImageFromGallery()
         }
 
+
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.questions.collect { list ->
                     adapter.differ.submitList(list)
+                    binding.tvWrittenTexts.text =
+                        resources.getString(R.string.written_texts, list.size)
+                    binding.tvActiveDays.text = resources.getString(
+                        R.string.active_days, adapter.getNumberOfDays(list)
+                    )
                 }
             }
         }
+
 
         adapter.setOnItemClickListener { question ->
             val bundle = Bundle()
@@ -78,6 +86,7 @@ class AccountFragment :
             e.printStackTrace()
         }
     }
+
 
     private fun setAvatarFromCache() {
         val avatarImageView = binding.ivAvatar

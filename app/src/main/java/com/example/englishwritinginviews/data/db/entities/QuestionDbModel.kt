@@ -13,11 +13,12 @@ data class QuestionDbModel(
     @ColumnInfo(name = "difficulty") val difficulty: String,
     @ColumnInfo(name = "color") val color: String,
     @ColumnInfo(name = "isAnswered") val isAnswered: Boolean,
-    @ColumnInfo(name = "answeredAt") val answeredAt: Long
+    @ColumnInfo(name = "answeredAt") val answeredAt: Long,
+    @ColumnInfo(name = "rating") val rating: Double
 )
 
 fun QuestionDbModel.toDomainModel(): QuestionDomain =
-    QuestionDomain(id, question, answer, difficulty, color, isAnswered, answeredAt)
+    QuestionDomain(id, question, answer, difficulty, color, isAnswered, answeredAt, rating)
 
 fun QuestionDomain.toDbModel(): QuestionDbModel =
-    QuestionDbModel(id, question, answer, difficulty, color, isAnswered, answeredAt)
+    QuestionDbModel(id, question, answer, difficulty, color, isAnswered, answeredAt, rating)

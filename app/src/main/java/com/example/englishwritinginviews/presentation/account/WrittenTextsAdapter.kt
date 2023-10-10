@@ -24,7 +24,7 @@ class WrittenTextsAdapter : Adapter<WrittenTextsAdapter.WrittenTextsViewHolder>(
                 tvDifficultyInInsights.text = question.difficulty
                 tvDifficultyInInsights.setDifficultyColor(question.color)
                 tvTextInInsights.text = question.answer
-                ratingBarInInsights.rating = 3f
+                ratingBarInInsights.rating = question.rating.toFloat()
             }
 
             itemView.setOnClickListener {
@@ -45,6 +45,7 @@ class WrittenTextsAdapter : Adapter<WrittenTextsAdapter.WrittenTextsViewHolder>(
     override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: WrittenTextsViewHolder, position: Int) {
+        differ.currentList.sortedByDescending { it.answeredAt }
         holder.bind(differ.currentList[position])
     }
 
@@ -59,6 +60,25 @@ class WrittenTextsAdapter : Adapter<WrittenTextsAdapter.WrittenTextsViewHolder>(
     }
 
     val differ = AsyncListDiffer(this, differCallback)
+
+    private fun getDays(timeList: List<Long>): Int {
+        return if (timeList.isNotEmpty()) {
+            val timeDiffInMillis = timeList.max() - timeList.min()
+            (timeDiffInMillis / (1000 * 60 * 60 * 24)).toInt()
+        } else {
+            0
+        }
+
+    }
+
+    fun getNumberOfDays(questions: List<QuestionDomain>): Int {
+        val list = questions.sortedByDescending { it.answeredAt }
+        val days = mutableListOf<Long>()
+        list.forEach {
+            days.add(it.answeredAt)
+        }
+        return getDays(days)
+    }
 
     fun setOnItemClickListener(listener: (QuestionDomain) -> Unit) {
         onItemClickListener = listener

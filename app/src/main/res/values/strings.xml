@@ -11,8 +11,8 @@
     <string name="chatbot">chatbot</string>
     <string name="account">account</string>
     <string name="illia_palamarchuk_todelete">Illia Palamarchuk</string>
-    <string name="written_texts">0\nнаписаних текстів</string>
-    <string name="active_days">0\nактивних днів</string>
+    <string name="written_texts">%d\nнаписаних текстів</string>
+    <string name="active_days">%d\nактивних днів</string>
     <string name="settings">Налаштування</string>
     <string name="answer_example_todelete">My favorite holiday destination is the beautiful island of Bali, Indonesia. What I love most about Bali is its enchanting blend of culture, nature, and tranquility. The lush green rice terraces, pristine beaches, and vibrant coral reefs offer a breathtaking natural landscape to explore. My favorite holiday destination is the beautiful island of Bali, Indonesia. What I love most about Bali is its enchanting blend of culture, nature, and tranquility. The lush green rice terraces, pristine beaches, and vibrant coral reefs offer a breathtaking natural landscape to explore. Moreover, Bali\'s rich cultural heritage, including its traditional dance, art, and rituals, captivates me every time I visit. The warmth and friendliness of the Balinese people create a welcoming atmosphere that makes you feel at home. One of the highlights of Bali is its diverse cuisine, from delicious street food to gourmet restaurants. Exploring the local flavors is always a delightful experience. Bali also provides the perfect balance between relaxation and adventure. Whether I want to meditate in a serene temple or surf on the wild waves, Bali has it all. Overall, Bali\'s unique blend of spirituality, natural beauty, and vibrant culture makes it my favorite holiday destination, and I can\'t help but be drawn back to this paradise every chance I get</string>
     <string name="question_example_todelete">Describe your favorite holiday destination and why you like it.</string>

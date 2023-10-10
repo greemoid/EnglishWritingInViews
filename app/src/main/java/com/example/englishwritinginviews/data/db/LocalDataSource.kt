@@ -5,7 +5,9 @@ import com.example.englishwritinginviews.data.db.entities.QuestionDbModel
 import com.example.englishwritinginviews.data.db.entities.toDomainModel
 import com.example.englishwritinginviews.domain.QuestionDomain
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class LocalDataSource(private val dao: QuestionDao) {
 
@@ -21,9 +23,9 @@ class LocalDataSource(private val dao: QuestionDao) {
     fun getAnsweredQuestions(): Flow<List<QuestionDomain>> =
         safeFlowCall { dao.getAnsweredQuestions() }
 
-    fun updateAnswer(id: Int, answer: String, answeredAt: Long): QuestionDomain {
+    fun updateAnswer(id: Int, answer: String, answeredAt: Long, rating: Float): QuestionDomain {
         return try {
-            dao.updateAndGetAnswer(id = id, answer = answer, answeredAt = answeredAt)
+            dao.updateAndGetAnswer(id = id, answer = answer, answeredAt = answeredAt, rating = rating)
                 .toDomainModel()
         } catch (e: Exception) {
             throw Exception(e)
@@ -31,13 +33,9 @@ class LocalDataSource(private val dao: QuestionDao) {
     }
 
     private inline fun safeFlowCall(crossinline flowFunction: () -> Flow<List<QuestionDbModel>>): Flow<List<QuestionDomain>> {
-        return channelFlow {
+        return flow {
             try {
-
-                flowFunction().collect {
-                    send(it.map { model -> model.toDomainModel() })
-                }
-
+                emitAll(flowFunction().map { flow -> flow.map { model -> model.toDomainModel() } })
             } catch (e: Exception) {
                 Log.d("asac", e.toString())
             }

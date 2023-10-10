@@ -9,6 +9,6 @@ interface MistakesRepository {
 
     fun getAnsweredQuestions(): Flow<List<QuestionDomain>>
 
-    fun updateAnswer(id: Int, answer: String, answeredAt: Long): QuestionDomain
+    fun updateAnswer(id: Int, answer: String, answeredAt: Long, rating: Float): QuestionDomain
 
 }

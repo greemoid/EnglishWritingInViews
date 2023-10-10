@@ -7,9 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.domain.FetchMistakesUseCase
 import com.example.englishwritinginviews.domain.Mistake
+import com.example.englishwritinginviews.domain.QuestionDomain
+import com.example.englishwritinginviews.domain.UpdateAnswerUseCase
 import com.example.englishwritinginviews.domain.WorkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,11 +28,23 @@ data class AnswerUiState(
 
 @HiltViewModel
 class AnswerViewModel @Inject constructor(
-    private val fetchMistakesUseCase: FetchMistakesUseCase
+    private val fetchMistakesUseCase: FetchMistakesUseCase,
+    private val updateAnswerUseCase: UpdateAnswerUseCase
 ) : ViewModel() {
 
     private val _uiState: MutableLiveData<AnswerUiState> = MutableLiveData()
     val uiState: LiveData<AnswerUiState> = _uiState
+
+    private var _stateFlow: MutableStateFlow<QuestionDomain> =
+        MutableStateFlow(QuestionDomain(0, "question", "answer", "difficulty", "color", false, 1, 0.0))
+    val stateFlow: StateFlow<QuestionDomain> = _stateFlow
+
+    fun update(id: Int, answer: String, rating: Float) {
+        viewModelScope.launch {
+            val currentDate = System.currentTimeMillis()
+            _stateFlow.value = updateAnswerUseCase(id, answer, currentDate, rating)
+        }
+    }
 
 
     fun fetchMistakeResponse(answer: String) = viewModelScope.launch {
