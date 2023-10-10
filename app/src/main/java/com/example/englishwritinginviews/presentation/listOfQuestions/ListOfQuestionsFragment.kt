@@ -57,6 +57,10 @@ class ListOfQuestionsFragment :
 
         }
 
+        binding.btnStrick.setOnClickListener {
+            findNavController().navigate(R.id.action_listOfQuestionsFragment_to_strikeFragment)
+        }
+
 
         binding.btnFilterMenu.setOnClickListener {
             openBottomSheetDialog()

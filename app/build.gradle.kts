@@ -47,6 +47,9 @@ android {
 
 dependencies {
 
+    // Calendar
+    implementation("com.kizitonwose.calendar:view:2.4.0")
+    //implementation("com.github.prolificinteractive:material-calendarview:2.0.0")
 
     // Room
     val roomVersion = "2.5.2"
@@ -79,7 +82,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
 
-    //todo add viewmodel and other architectural dependencies if needed
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
     // Splash Screen

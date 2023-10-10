@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_listOfQuestionsFragment_to_answerFragment"
             app:destination="@id/answerFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_strikeFragment2"
+            app:destination="@id/strikeFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -58,7 +61,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/strikeFragment"
-        android:name="com.example.englishwritinginviews.presentation.StrikeFragment"
+        android:name="com.example.englishwritinginviews.presentation.strike.StrikeFragment"
         android:label="fragment_strike"
         tools:layout="@layout/fragment_strike" />
     <fragment
