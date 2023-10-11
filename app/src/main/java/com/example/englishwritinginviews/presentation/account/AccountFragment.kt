@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -31,7 +31,7 @@ class AccountFragment :
 
 
     override fun init() {
-        val viewModel by viewModels<AccountViewModel>()
+        val viewModel by activityViewModels<AccountViewModel>()
         val adapter = WrittenTextsAdapter()
         val rv = binding.rvActivity
         rv.adapter = adapter

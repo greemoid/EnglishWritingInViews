@@ -4,9 +4,14 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.children
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.CalendarDayLayoutBinding
 import com.example.englishwritinginviews.databinding.FragmentStrikeBinding
+import com.example.englishwritinginviews.presentation.account.AccountViewModel
 import com.example.englishwritinginviews.presentation.core.BaseFragment
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.DayPosition
@@ -15,6 +20,7 @@ import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.view.CalendarView
 import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.ViewContainer
+import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
@@ -25,18 +31,25 @@ import java.util.Locale
 class StrikeFragment :
     BaseFragment<FragmentStrikeBinding>(FragmentStrikeBinding::inflate) {
 
+    private val viewModel: AccountViewModel by activityViewModels()
+
     private val monthCalendarView: CalendarView get() = binding.calendarView
-
-    private val selectedDates = mutableSetOf<LocalDate>(
-        LocalDate.of(2023, 10, 13),
-        LocalDate.of(2023, 10, 14),
-        LocalDate.of(2023, 10, 16),
-        LocalDate.of(2023, 10, 19)
-    )
-
+    private var selectedDates = mutableSetOf<LocalDate>()
     private val today = LocalDate.now()
 
     override fun init() {
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.dates.collect { set ->
+                    set.map {
+                        selectedDates.add(it)
+                        monthCalendarView.notifyCalendarChanged()
+                    }
+
+                }
+            }
+        }
 
         val daysOfWeek = daysOfWeek()
         binding.legendLayout.root.children
@@ -84,8 +97,17 @@ class StrikeFragment :
         if (isSelectable) {
             when {
                 selectedDates.contains(date) -> {
-                    textView.setTextColor(resources.getColor(R.color.white_text, context?.theme))
                     textView.setBackgroundResource(R.drawable.green_textview_background)
+                    if (today == date) {
+                        textView.setTextColor(
+                            resources.getColor(
+                                R.color.light_red_button,
+                                context?.theme
+                            )
+                        )
+                    } else {
+                        textView.setTextColor(resources.getColor(R.color.white, context?.theme))
+                    }
                 }
 
                 today == date -> {
