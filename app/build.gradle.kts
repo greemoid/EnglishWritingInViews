@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.englishwritinginviews"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
