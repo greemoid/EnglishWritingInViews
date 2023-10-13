@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
-class LocalDataSource(private val dao: QuestionDao) {
+class LocalDataSource(private val dao: QuestionDao) : BaseFlowResponse() {
 
     fun getQuestions(filterList: Set<String>): Flow<List<QuestionDomain>> =
         safeFlowCall {
@@ -28,18 +28,8 @@ class LocalDataSource(private val dao: QuestionDao) {
             dao.updateAndGetAnswer(id = id, answer = answer, answeredAt = answeredAt, rating = rating)
                 .toDomainModel()
         } catch (e: Exception) {
-            throw Exception(e)
+            throw Exception("Error: Cannot update your answer")
         }
     }
-
-    private inline fun safeFlowCall(crossinline flowFunction: () -> Flow<List<QuestionDbModel>>): Flow<List<QuestionDomain>> {
-        return flow {
-            try {
-                emitAll(flowFunction().map { flow -> flow.map { model -> model.toDomainModel() } })
-            } catch (e: Exception) {
-                Log.d("asac", e.toString())
-            }
-        }
-    }
-
 }
+

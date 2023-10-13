@@ -64,11 +64,10 @@ class WrittenTextsAdapter : Adapter<WrittenTextsAdapter.WrittenTextsViewHolder>(
     private fun getDays(timeList: List<Long>): Int {
         return if (timeList.isNotEmpty()) {
             val timeDiffInMillis = timeList.max() - timeList.min()
-            (timeDiffInMillis / (1000 * 60 * 60 * 24)).toInt()
+            (timeDiffInMillis / (1000L * 60L * 60L * 24L) + 2L).toInt()
         } else {
             0
         }
-
     }
 
     fun getNumberOfDays(questions: List<QuestionDomain>): Int {
@@ -91,7 +90,7 @@ class WrittenTextsAdapter : Adapter<WrittenTextsAdapter.WrittenTextsViewHolder>(
         calendar.timeInMillis = timeMillis
 
         val currentDate = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("dd MM", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("dd MMMM", Locale.getDefault())
 
         if (isSameDay(calendar, currentDate)) {
             return "Today"
