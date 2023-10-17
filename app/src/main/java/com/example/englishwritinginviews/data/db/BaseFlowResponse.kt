@@ -14,10 +14,7 @@ abstract class BaseFlowResponse {
             try {
                 emitAll(flowFunction().map { flow -> flow.map { model -> model.toDomainModel() } })
             } catch (e: Exception) {
-                throw CustomDatabaseException("Error: Cannot make safe call to database")
+                throw Exception("Error: Cannot make safe call to database / $e")
             }
         }
-
 }
-
-class CustomDatabaseException(message: String) : Exception(message)

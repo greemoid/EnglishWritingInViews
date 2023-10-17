@@ -33,7 +33,7 @@ class ListOfQuestionsFragment :
 
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.questionsState.collect { list ->
                     adapter.differ.submitList(list)
                 }

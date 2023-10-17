@@ -25,7 +25,6 @@ class ListOfQuestionsViewModel @Inject constructor(private val useCase: FetchQue
     }
 
     fun getQuestions(filterList: Set<String> = emptySet()) {
-
         viewModelScope.launch {
             useCase(filterList).collect { list ->
                 _questionsState.value = list

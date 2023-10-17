@@ -88,12 +88,11 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     // Testing
-//    androidTestImplementation("org.mockito:mockito-core:3.10.0")
-//    testImplementation("org.mockito:mockito-core:3.10.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     androidTestImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 
     val mockkVersion = "1.13.8"
     testImplementation("io.mockk:mockk:${mockkVersion}")

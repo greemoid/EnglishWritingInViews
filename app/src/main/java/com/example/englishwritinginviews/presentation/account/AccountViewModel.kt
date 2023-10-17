@@ -1,6 +1,5 @@
 package com.example.englishwritinginviews.presentation.account
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.domain.FetchAnsweredQuestionsUseCase

@@ -70,6 +70,7 @@ class WrittenTextsAdapter : Adapter<WrittenTextsAdapter.WrittenTextsViewHolder>(
         }
     }
 
+    // todo fix it
     fun getNumberOfDays(questions: List<QuestionDomain>): Int {
         val list = questions.sortedByDescending { it.answeredAt }
         val days = mutableListOf<Long>()
