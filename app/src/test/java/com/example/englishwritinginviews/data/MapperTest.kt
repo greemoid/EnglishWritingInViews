@@ -10,7 +10,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.junit.jupiter.api.Assertions
 
 class MapperTest {
 
@@ -31,7 +30,7 @@ class MapperTest {
         val resultList = outputFlow.toList()
 
         // Assert the mapping results
-        Assertions.assertEquals(3, resultList.size)
+        assertEquals(3, resultList.size)
 
         // Verify the first item is a WorkResult.Success with a list of Mistakes
         val firstResult = resultList[0]

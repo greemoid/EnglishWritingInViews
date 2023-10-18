@@ -61,14 +61,6 @@ class WrittenTextsAdapter : Adapter<WrittenTextsAdapter.WrittenTextsViewHolder>(
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    fun getNumberOfDays(questions: List<QuestionDomain>): Int {
-        val daysSet = mutableSetOf<String>()
-        questions.forEach {
-            daysSet.add(formatTimeMillisToDateString(it.answeredAt))
-        }
-        return daysSet.size
-    }
-
     fun setOnItemClickListener(listener: (QuestionDomain) -> Unit) {
         onItemClickListener = listener
     }

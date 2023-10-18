@@ -24,11 +24,9 @@ import java.io.IOException
 class AccountFragment :
     BaseFragment<FragmentAccountBinding>(FragmentAccountBinding::inflate) {
 
-
     companion object {
         private const val SELECT_IMAGE_REQUEST_CODE = -1
     }
-
 
     override fun init() {
         val viewModel by activityViewModels<AccountViewModel>()
@@ -48,8 +46,15 @@ class AccountFragment :
                     adapter.differ.submitList(list)
                     binding.tvWrittenTexts.text =
                         resources.getString(R.string.written_texts, list.size)
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.numberOfDays.collect { days ->
                     binding.tvActiveDays.text = resources.getString(
-                        R.string.active_days, adapter.getNumberOfDays(list)
+                        R.string.active_days, days
                     )
                 }
             }

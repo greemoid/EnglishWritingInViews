@@ -183,7 +183,7 @@ class LocalDataSourceTest {
         try {
             return mockk()
         } catch (e: Exception) {
-            throw CustomDatabaseException("Error: Cannot make safe call to database")
+            throw Exception("Error: Cannot make safe call to database")
         }
     }
 }

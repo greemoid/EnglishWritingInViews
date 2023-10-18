@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
-    private val fetchAnsweredQuestionsUseCase: FetchAnsweredQuestionsUseCase
+    private val fetchAnsweredQuestionsUseCase: FetchAnsweredQuestionsUseCase,
 ) : ViewModel() {
 
     private val _questions = MutableStateFlow<List<QuestionDomain>>(emptyList())
@@ -23,6 +23,9 @@ class AccountViewModel @Inject constructor(
 
     private val _dates = MutableStateFlow<Set<LocalDate>>(emptySet())
     val dates: StateFlow<Set<LocalDate>> = _dates
+
+    private val _numberOfDays = MutableStateFlow(0)
+    val numberOfDays: StateFlow<Int> = _numberOfDays
 
     init {
         fetchQuestions()
@@ -37,14 +40,15 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-
     private fun getSetOfDates(list: List<QuestionDomain>): Set<LocalDate> {
         val mutableSetDates = mutableSetOf<LocalDate>()
         for (model in list) {
             mutableSetDates.add(toLocalDate(model.answeredAt))
         }
+        _numberOfDays.value = mutableSetDates.size
         return mutableSetDates
     }
+
 
     private fun toLocalDate(date: Long): LocalDate {
         val instant: Instant = Instant.ofEpochMilli(date)

@@ -46,7 +46,6 @@ class StrikeFragment :
                         selectedDates.add(it)
                         monthCalendarView.notifyCalendarChanged()
                     }
-
                 }
             }
         }
