@@ -26,4 +26,8 @@
     <string name="checked_description">"The icon to know if the question was answered "</string>
     <string name="hard">Hard</string>
     <string name="today">Сьогодні</string>
+    <string name="unavailable">The internet is not available</string>
+    <string name="losing">We are losing the internet connection</string>
+    <string name="lost">The internet connection is lost</string>
+    <string name="available">The internet is connected</string>
 </resources>

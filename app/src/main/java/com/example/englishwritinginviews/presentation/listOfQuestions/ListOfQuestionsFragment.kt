@@ -1,6 +1,7 @@
 package com.example.englishwritinginviews.presentation.listOfQuestions
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.CompoundButton
@@ -36,6 +37,21 @@ class ListOfQuestionsFragment :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.questionsState.collect { list ->
                     adapter.differ.submitList(list)
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.connectionState.collect { state ->
+                    if (!state.isConnected) {
+                        binding.progressConnection.visibility = View.VISIBLE
+                        binding.tvConnectionStatus.visibility = View.VISIBLE
+                        binding.tvConnectionStatus.text = state.message
+                    } else {
+                        binding.progressConnection.visibility = View.INVISIBLE
+                        binding.tvConnectionStatus.visibility = View.INVISIBLE
+                    }
                 }
             }
         }
