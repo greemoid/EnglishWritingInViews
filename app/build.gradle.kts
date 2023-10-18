@@ -2,10 +2,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.safeargs)
     id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
 }
 
@@ -25,13 +25,25 @@ android {
 
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField("String", "API_URL", "\"https://api.languagetoolplus.com/v2/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+        release {
+            buildConfigField("String", "API_URL", "\"https://api.languagetoolplus.com/v2/\"")
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -48,55 +60,44 @@ android {
 dependencies {
 
     // Calendar
-    implementation("com.kizitonwose.calendar:view:2.4.0")
-    //implementation("com.github.prolificinteractive:material-calendarview:2.0.0")
+    implementation(libs.calendar)
 
     // Room
-    val roomVersion = "2.5.2"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
-
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
     // Hilt
-    val hiltVersion = "2.44"
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
-    kaptTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
-
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    kaptTest(libs.hilt.compiler)
 
     // Retrofit
-    val retrofitVersion = "2.9.0"
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.interceptor)
 
-    val corVersion = "1.6.4"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$corVersion")
+    // Coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+    testImplementation(libs.coroutines.test)
 
     // Jetpack Navigation
-    val navVersion = "2.7.2"
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-    androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    androidTestImplementation(libs.navigation.testing)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    // Arch
+    implementation(libs.viewmodel)
+    testImplementation(libs.arch.testing)
 
     // Splash Screen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.splash)
 
-    // Testing
-
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    androidTestImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
-
-    val mockkVersion = "1.13.8"
-    testImplementation("io.mockk:mockk:${mockkVersion}")
-    androidTestImplementation("io.mockk:mockk-android:$mockkVersion")
+    // MockK
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
 
 
     implementation(libs.core.ktx)

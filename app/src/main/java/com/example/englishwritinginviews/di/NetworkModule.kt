@@ -1,5 +1,6 @@
 package com.example.englishwritinginviews.di
 
+import com.example.englishwritinginviews.BuildConfig
 import com.example.englishwritinginviews.data.api.ApiService
 import dagger.Module
 import dagger.Provides
@@ -33,7 +34,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.languagetoolplus.com/v2/")
+            .baseUrl(BuildConfig.API_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
