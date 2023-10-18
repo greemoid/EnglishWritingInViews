@@ -61,23 +61,12 @@ class WrittenTextsAdapter : Adapter<WrittenTextsAdapter.WrittenTextsViewHolder>(
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    private fun getDays(timeList: List<Long>): Int {
-        return if (timeList.isNotEmpty()) {
-            val timeDiffInMillis = timeList.max() - timeList.min()
-            (timeDiffInMillis / (1000L * 60L * 60L * 24L) + 2L).toInt()
-        } else {
-            0
-        }
-    }
-
-    // todo fix it / i need a set here(set of days, not of longs)
     fun getNumberOfDays(questions: List<QuestionDomain>): Int {
-        val list = questions.sortedByDescending { it.answeredAt }
-        val days = mutableListOf<Long>()
-        list.forEach {
-            days.add(it.answeredAt)
+        val daysSet = mutableSetOf<String>()
+        questions.forEach {
+            daysSet.add(formatTimeMillisToDateString(it.answeredAt))
         }
-        return getDays(days)
+        return daysSet.size
     }
 
     fun setOnItemClickListener(listener: (QuestionDomain) -> Unit) {
