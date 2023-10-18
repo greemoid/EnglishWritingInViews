@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.safeargs)
+    alias(libs.plugins.google.services)
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
 }
@@ -98,6 +99,13 @@ dependencies {
     // MockK
     testImplementation(libs.mockk)
     androidTestImplementation(libs.mockk.android)
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
+    // OneSignal
+    implementation("com.onesignal:OneSignal:[5.0.0, 5.99.99]")
 
 
     implementation(libs.core.ktx)
