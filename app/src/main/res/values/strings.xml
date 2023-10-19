@@ -30,4 +30,5 @@
     <string name="losing">We are losing the internet connection</string>
     <string name="lost">The internet connection is lost</string>
     <string name="available">The internet is connected</string>
+    <string name="default_web_client_id">DEFAULT_ID</string>
 </resources>
