@@ -2,10 +2,12 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.safeargs)
+    alias(libs.plugins.google.services)
     id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -14,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.englishwritinginviews"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -22,14 +24,29 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
-        release {
+        debug {
+            buildConfigField("String", "API_URL", "\"https://api.languagetoolplus.com/v2/\"")
+            buildConfigField("String", "ONESIGNAL_APP_ID", "\"e3d4966d-211c-4f69-9d15-2be3e78bb4e8\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+        release {
+            buildConfigField("String", "API_URL", "\"https://api.languagetoolplus.com/v2/\"")
+            buildConfigField("String", "ONESIGNAL_APP_ID", "\"e3d4966d-211c-4f69-9d15-2be3e78bb4e8\"")
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -45,48 +62,63 @@ android {
 
 dependencies {
 
-    // Room
-    val roomVersion = "2.5.2"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
+    // Calendar
+    implementation(libs.calendar)
 
+    // Room
+    implementation(libs.room.runtime)
+    implementation(libs.play.services.auth)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
     // Hilt
-    val hiltVersion = "2.44"
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    ksp("com.google.dagger:hilt-android-compiler:$hiltVersion")
-    kspTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
-
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    kaptTest(libs.hilt.compiler)
 
     // Retrofit
-    val retrofitVersion = "2.9.0"
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.interceptor)
 
-    val corVersion = "1.6.4"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$corVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$corVersion")
+    // Coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+    testImplementation(libs.coroutines.test)
 
     // Jetpack Navigation
-    val navVersion = "2.7.2"
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-    androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    androidTestImplementation(libs.navigation.testing)
 
-    //todo add viewmodel and other architectural dependencies if needed
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    // Arch
+    implementation(libs.viewmodel)
+    testImplementation(libs.arch.testing)
 
     // Splash Screen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.splash)
+
+    // MockK
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth:22.2.0")
+
+    // OneSignal
+    implementation("com.onesignal:OneSignal:[5.0.0, 5.99.99]")
+
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 }

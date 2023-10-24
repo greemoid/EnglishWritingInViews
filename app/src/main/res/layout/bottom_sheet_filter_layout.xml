@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/size_32dp"
+    android:background="@color/grey_cards"
+    android:orientation="vertical">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/is_easy"
+        android:layout_margin="@dimen/size_8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white_text"
+        style="@style/RedCheckBox"
+        android:text="Easy" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/is_medium"
+        android:layout_margin="@dimen/size_8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white_text"
+        style="@style/RedCheckBox"
+        android:text="Medium" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/is_hard"
+        android:layout_margin="@dimen/size_8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white_text"
+        style="@style/RedCheckBox"
+        android:text="Hard" />
+
+    <Button
+        android:id="@+id/btn_apply"
+        android:layout_margin="@dimen/size_8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white_text"
+        android:backgroundTint="@color/red_button"
+        android:text="Apply Filters" />
+</LinearLayout>
