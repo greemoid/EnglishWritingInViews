@@ -1,14 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--todo change on linear-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ListOfQuestionsFragment">
+    android:background="@color/black_background"
+    tools:context=".presentation.MainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_questions"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_filter_menu"
+        tools:listitem="@layout/question_item_layout" />
 
-</FrameLayout>
+
+    <ImageButton
+        android:id="@+id/btn_strick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:layout_marginEnd="@dimen/size_8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_fire"
+        app:layout_constraintEnd_toStartOf="@+id/btn_account"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/strick" />
+
+    <ImageButton
+        android:id="@+id/btn_filter_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:layout_marginEnd="@dimen/size_8dp"
+        android:longClickable="true"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintEnd_toStartOf="@+id/btn_strick"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/chatbot" />
+
+    <ImageButton
+        android:id="@+id/btn_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_8dp"
+        android:layout_marginEnd="@dimen/size_8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/account" />
+
+    <ProgressBar
+        android:id="@+id/progress_connection"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="@dimen/size_32dp"
+        android:layout_height="@dimen/size_32dp"
+        android:layout_marginStart="8dp"
+        android:visibility="invisible"
+        android:indeterminateTint="@color/not_primary_text"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_filter_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_filter_menu" />
+
+    <TextView
+        android:id="@+id/tv_connection_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="Loading"
+        android:visibility="invisible"
+        android:textColor="@color/not_primary_text"
+        app:layout_constraintBottom_toBottomOf="@+id/progress_connection"
+        app:layout_constraintStart_toEndOf="@+id/progress_connection"
+        app:layout_constraintTop_toTopOf="@+id/progress_connection" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

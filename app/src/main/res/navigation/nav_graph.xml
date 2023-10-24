@@ -7,9 +7,28 @@
 
     <fragment
         android:id="@+id/listOfQuestionsFragment"
-        android:name="com.example.englishwritinginviews.presentation.ListOfQuestionsFragment"
+        android:name="com.example.englishwritinginviews.presentation.listOfQuestions.ListOfQuestionsFragment"
         android:label="fragment_list_of_questions"
-        tools:layout="@layout/fragment_list_of_questions" />
+        tools:layout="@layout/fragment_list_of_questions" >
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_chatbotFragment"
+            app:destination="@id/chatbotFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_strikeFragment"
+            app:destination="@id/strikeFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_questionFragment"
+            app:destination="@id/questionFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
+        <action
+            android:id="@+id/action_listOfQuestionsFragment_to_strikeFragment2"
+            app:destination="@id/strikeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.englishwritinginviews.presentation.MainFragment"
@@ -18,5 +37,62 @@
         <action
             android:id="@+id/action_mainFragment_to_listOfQuestionsFragment"
             app:destination="@id/listOfQuestionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatbotFragment"
+        android:name="com.example.englishwritinginviews.presentation.ChatBotFragment"
+        android:label="ChatbotFragment" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.englishwritinginviews.presentation.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.englishwritinginviews.presentation.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/strikeFragment"
+        android:name="com.example.englishwritinginviews.presentation.strike.StrikeFragment"
+        android:label="fragment_strike"
+        tools:layout="@layout/fragment_strike" />
+    <fragment
+        android:id="@+id/answerFragment"
+        android:name="com.example.englishwritinginviews.presentation.answer.AnswerFragment"
+        android:label="fragment_answer"
+        tools:layout="@layout/fragment_answer" >
+        <action
+            android:id="@+id/action_answerFragment_to_questionFragment"
+            app:destination="@id/questionFragment" />
+        <argument
+            android:name="question"
+            app:argType="com.example.englishwritinginviews.domain.QuestionDomain" />
+        <action
+            android:id="@+id/action_answerFragment_to_listOfQuestionsFragment"
+            app:destination="@id/listOfQuestionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionFragment"
+        android:name="com.example.englishwritinginviews.presentation.question.QuestionFragment"
+        android:label="fragment_question"
+        tools:layout="@layout/fragment_question" >
+        <action
+            android:id="@+id/action_questionFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
+        <argument
+            android:name="question"
+            app:argType="com.example.englishwritinginviews.domain.QuestionDomain" />
     </fragment>
 </navigation>
