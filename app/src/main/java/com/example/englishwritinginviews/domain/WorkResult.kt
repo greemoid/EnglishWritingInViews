@@ -4,5 +4,5 @@ package com.example.englishwritinginviews.domain
 sealed class WorkResult<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T) : WorkResult<T>(data)
     class Error<T>(message: String, data: T? = null) : WorkResult<T>(data, message)
-    class Loading<T> : WorkResult<T>()
+    class Loading<T>(data: T? = null) : WorkResult<T>(data)
 }

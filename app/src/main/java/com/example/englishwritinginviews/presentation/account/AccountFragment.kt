@@ -38,6 +38,9 @@ class AccountFragment :
             selectImageFromGallery()
         }
 
+        binding.btnSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_settingsFragment)
+        }
 
 
         lifecycleScope.launch {

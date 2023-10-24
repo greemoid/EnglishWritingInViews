@@ -17,9 +17,6 @@
             android:id="@+id/action_listOfQuestionsFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
         <action
-            android:id="@+id/action_listOfQuestionsFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
             android:id="@+id/action_listOfQuestionsFragment_to_strikeFragment"
             app:destination="@id/strikeFragment" />
         <action
@@ -53,12 +50,19 @@
         <action
             android:id="@+id/action_accountFragment_to_answerFragment"
             app:destination="@id/answerFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.englishwritinginviews.presentation.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/strikeFragment"
         android:name="com.example.englishwritinginviews.presentation.strike.StrikeFragment"

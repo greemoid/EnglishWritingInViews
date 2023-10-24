@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.safeargs)
+    alias(libs.plugins.google.services)
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
 }
@@ -27,6 +28,7 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "API_URL", "\"https://api.languagetoolplus.com/v2/\"")
+            buildConfigField("String", "ONESIGNAL_APP_ID", "\"e3d4966d-211c-4f69-9d15-2be3e78bb4e8\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -35,6 +37,7 @@ android {
         }
         release {
             buildConfigField("String", "API_URL", "\"https://api.languagetoolplus.com/v2/\"")
+            buildConfigField("String", "ONESIGNAL_APP_ID", "\"e3d4966d-211c-4f69-9d15-2be3e78bb4e8\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -64,6 +67,7 @@ dependencies {
 
     // Room
     implementation(libs.room.runtime)
+    implementation(libs.play.services.auth)
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
@@ -98,6 +102,14 @@ dependencies {
     // MockK
     testImplementation(libs.mockk)
     androidTestImplementation(libs.mockk.android)
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth:22.2.0")
+
+    // OneSignal
+    implementation("com.onesignal:OneSignal:[5.0.0, 5.99.99]")
 
 
     implementation(libs.core.ktx)
