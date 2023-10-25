@@ -1,10 +1,12 @@
 package com.example.englishwritinginviews.presentation.listOfQuestions
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -41,6 +43,9 @@ class ListOfQuestionsFragment :
             }
         }
 
+        handleHearts()
+
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.connectionState.collect { state ->
@@ -48,9 +53,16 @@ class ListOfQuestionsFragment :
                         binding.progressConnection.visibility = View.VISIBLE
                         binding.tvConnectionStatus.visibility = View.VISIBLE
                         binding.tvConnectionStatus.text = state.message
+
+                        binding.ivHeartFirst.visibility = View.INVISIBLE
+                        binding.ivHeartSecond.visibility = View.INVISIBLE
+                        binding.ivHeartThird.visibility = View.INVISIBLE
+
                     } else {
                         binding.progressConnection.visibility = View.INVISIBLE
                         binding.tvConnectionStatus.visibility = View.INVISIBLE
+
+                        handleHearts()
                     }
                 }
             }
@@ -59,16 +71,28 @@ class ListOfQuestionsFragment :
         adapter.setOnItemClickListener { question ->
             val bundle = Bundle()
             bundle.putSerializable("question", question)
-            if (question.isAnswered) {
-                findNavController().navigate(
-                    R.id.action_listOfQuestionsFragment_to_answerFragment,
-                    bundle
-                )
-            } else {
-                findNavController().navigate(
-                    R.id.action_listOfQuestionsFragment_to_questionFragment,
-                    bundle
-                )
+            viewModel.isLifeAvailable.observe(viewLifecycleOwner) {
+                if (it) {
+                    if (question.isAnswered) {
+                        findNavController().navigate(
+                            R.id.action_listOfQuestionsFragment_to_answerFragment,
+                            bundle
+                        )
+                    } else {
+                        findNavController().navigate(
+                            R.id.action_listOfQuestionsFragment_to_questionFragment,
+                            bundle
+                        )
+                    }
+                } else {
+                    viewModel.timeDiff.observe(viewLifecycleOwner) {
+                        Toast.makeText(
+                            requireContext(),
+                            "There are no hearts. Come back in $it",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
             }
 
         }
@@ -87,6 +111,38 @@ class ListOfQuestionsFragment :
         }
     }
 
+    private fun handleHearts() {
+
+        viewModel.livesCount.observe(viewLifecycleOwner) {
+            Log.d("asac", "checked $it")
+            when (it) {
+                3 -> {
+                    binding.ivHeartFirst.visibility = View.VISIBLE
+                    binding.ivHeartSecond.visibility = View.VISIBLE
+                    binding.ivHeartThird.visibility = View.VISIBLE
+                }
+
+                2 -> {
+
+                    binding.ivHeartFirst.visibility = View.VISIBLE
+                    binding.ivHeartSecond.visibility = View.VISIBLE
+                    binding.ivHeartThird.visibility = View.INVISIBLE
+                }
+
+                1 -> {
+                    binding.ivHeartFirst.visibility = View.VISIBLE
+                    binding.ivHeartSecond.visibility = View.INVISIBLE
+                    binding.ivHeartThird.visibility = View.INVISIBLE
+                }
+
+                else -> {
+                    binding.ivHeartFirst.visibility = View.INVISIBLE
+                    binding.ivHeartSecond.visibility = View.INVISIBLE
+                    binding.ivHeartThird.visibility = View.INVISIBLE
+                }
+            }
+        }
+    }
 
     private fun openBottomSheetDialog() {
         val dialog = BottomSheetDialog(requireContext())

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.safeargs)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.crashlytics)
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
 }
@@ -107,6 +108,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-auth:22.2.0")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     // OneSignal
     implementation("com.onesignal:OneSignal:[5.0.0, 5.99.99]")

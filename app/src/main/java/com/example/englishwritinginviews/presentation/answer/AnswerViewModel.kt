@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.domain.FetchMistakesUseCase
+import com.example.englishwritinginviews.domain.LivesHandler
 import com.example.englishwritinginviews.domain.Mistake
 import com.example.englishwritinginviews.domain.QuestionDomain
 import com.example.englishwritinginviews.domain.UpdateAnswerUseCase
@@ -29,7 +30,8 @@ data class AnswerUiState(
 @HiltViewModel
 class AnswerViewModel @Inject constructor(
     private val fetchMistakesUseCase: FetchMistakesUseCase,
-    private val updateAnswerUseCase: UpdateAnswerUseCase
+    private val updateAnswerUseCase: UpdateAnswerUseCase,
+    private val livesHandler: LivesHandler
 ) : ViewModel() {
 
     private val _uiState: MutableLiveData<AnswerUiState> = MutableLiveData()
@@ -54,6 +56,8 @@ class AnswerViewModel @Inject constructor(
             mistakes = emptyList(),
             rating = 0f,
         )
+
+        livesHandler.useLife()
 
         fetchMistakesUseCase(answer).collect { workResult ->
             when (workResult) {

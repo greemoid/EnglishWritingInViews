@@ -1,9 +1,12 @@
 package com.example.englishwritinginviews.presentation.listOfQuestions
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.domain.FetchQuestionsUseCase
+import com.example.englishwritinginviews.domain.LivesHandler
 import com.example.englishwritinginviews.domain.QuestionDomain
 import com.example.englishwritinginviews.presentation.core.ConnectionObserver
 import com.example.englishwritinginviews.presentation.core.ResourceManager
@@ -17,7 +20,8 @@ import javax.inject.Inject
 class ListOfQuestionsViewModel @Inject constructor(
     private val useCase: FetchQuestionsUseCase,
     private val connectionObserver: ConnectionObserver,
-    private val resourceManager: ResourceManager
+    private val resourceManager: ResourceManager,
+    private val livesHandler: LivesHandler
 ) :
     ViewModel() {
 
@@ -32,9 +36,26 @@ class ListOfQuestionsViewModel @Inject constructor(
     )
     val connectionState: StateFlow<ConnectionUiState> = _connectionState
 
+
+    private val _livesCount = MutableLiveData(0)
+    val livesCount: LiveData<Int> get() = _livesCount
+
+    private val _isLifeAvailable = MutableLiveData(false)
+    val isLifeAvailable: LiveData<Boolean> get() = _isLifeAvailable
+
+    private val _timeDiff = MutableLiveData("")
+    val timeDiff: LiveData<String> get() = _timeDiff
+
     init {
         getQuestions()
         getConnectionState()
+        handleLives()
+    }
+
+    private fun handleLives() {
+        _livesCount.value = livesHandler.getAvailableLives()
+        _isLifeAvailable.value = livesHandler.isLifeAvailable()
+        _timeDiff.value = livesHandler.getTheSmallestTimeDiff()
     }
 
     fun getQuestions(filterList: Set<String> = emptySet()) {

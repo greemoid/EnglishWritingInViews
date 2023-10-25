@@ -81,5 +81,35 @@
         app:layout_constraintStart_toEndOf="@+id/progress_connection"
         app:layout_constraintTop_toTopOf="@+id/progress_connection" />
 
+    <ImageView
+        android:id="@+id/iv_heart_first"
+        android:layout_width="@dimen/size_32dp"
+        android:layout_height="@dimen/size_32dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/heart"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_filter_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_filter_menu" />
+
+    <ImageView
+        android:id="@+id/iv_heart_second"
+        android:layout_width="@dimen/size_32dp"
+        android:layout_height="@dimen/size_32dp"
+        android:layout_marginStart="@dimen/size_4dp"
+        android:src="@drawable/heart"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_heart_first"
+        app:layout_constraintStart_toEndOf="@+id/iv_heart_first"
+        app:layout_constraintTop_toTopOf="@+id/iv_heart_first" />
+
+    <ImageView
+        android:id="@+id/iv_heart_third"
+        android:layout_width="@dimen/size_32dp"
+        android:layout_height="@dimen/size_32dp"
+        android:src="@drawable/heart"
+        android:layout_marginStart="@dimen/size_4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_heart_second"
+        app:layout_constraintStart_toEndOf="@+id/iv_heart_second"
+        app:layout_constraintTop_toTopOf="@+id/iv_heart_second" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
