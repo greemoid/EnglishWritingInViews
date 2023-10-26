@@ -69,6 +69,7 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     implementation(libs.play.services.auth)
+    implementation(libs.androidx.databinding.runtime)
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)

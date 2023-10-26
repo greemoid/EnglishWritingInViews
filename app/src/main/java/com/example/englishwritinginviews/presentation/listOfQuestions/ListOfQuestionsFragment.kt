@@ -114,7 +114,6 @@ class ListOfQuestionsFragment :
     private fun handleHearts() {
 
         viewModel.livesCount.observe(viewLifecycleOwner) {
-            Log.d("asac", "checked $it")
             when (it) {
                 3 -> {
                     binding.ivHeartFirst.visibility = View.VISIBLE

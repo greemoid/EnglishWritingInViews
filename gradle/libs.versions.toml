@@ -53,6 +53,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version = "20.7.0" }
+androidx-databinding-runtime = { group = "androidx.databinding", name = "databinding-runtime", version = "8.1.2" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

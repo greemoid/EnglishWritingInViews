@@ -87,6 +87,22 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_settings"
             tools:listitem="@layout/written_texts_item_layout" />
 
+
+        <TextView
+            android:id="@+id/tv_empty_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_128dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:text="@string/there_are_no_any_answers"
+            android:textColor="@color/white_text"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_settings" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
