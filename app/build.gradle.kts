@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.crashlytics)
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id("io.gitlab.arturbosch.detekt") version("1.23.3")
 }
 
 android {
@@ -24,7 +25,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
 
     buildTypes {
         debug {
@@ -46,6 +46,7 @@ android {
             )
         }
     }
+
     buildFeatures {
         buildConfig = true
     }
@@ -59,9 +60,25 @@ android {
     viewBinding {
         enable = true
     }
+    detekt {
+        toolVersion = "1.23.3"
+        config.setFrom(file("config/detekt/detekt.yml"))
+        buildUponDefaultConfig = true
+    }
+    tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+            txt.required.set(true)
+            sarif.required.set(true)
+            md.required.set(true)
+        }
+    }
 }
 
 dependencies {
+
+    implementation("io.agora.rtc:full-sdk:4.0.1")
 
     // Calendar
     implementation(libs.calendar)

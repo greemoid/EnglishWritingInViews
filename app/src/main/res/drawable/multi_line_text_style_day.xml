@@ -3,7 +3,6 @@
     android:thickness="0dp"
     android:shape="rectangle">
     <corners android:radius="8dp"/>
-    <solid android:color="@color/grey_cards"/>
-
+    <solid android:color="@color/light_grey_cards"/>
 
 </shape>

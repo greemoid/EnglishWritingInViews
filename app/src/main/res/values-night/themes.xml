@@ -3,10 +3,25 @@
     <style name="Base.Theme.EnglishWritingInViews" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:statusBarColor">@color/status_bar_dark</item>
+
+        <item name="colorPrimary">@color/black_background</item>
+        <item name="colorPrimaryDark">@color/status_bar_dark</item>
+        <item name="colorAccent">@color/red_button</item>
+        <item name="android:textColorPrimary">@color/white_text</item>
+        <item name="android:textColorSecondary">@color/not_primary_text</item>
+        <item name="colorControlNormal">@color/white_text</item>
+        <item name="colorControlActivated">@color/hint_color</item>
+
 
     </style>
 
-    <style name="Theme.EnglishWritingInViews" parent="Base.Theme.EnglishWritingInViews"/>
+    <style name="Theme.EnglishWritingInViews" parent="Base.Theme.EnglishWritingInViews">
+        <item name="checkboxStyle">@style/RedCheckBox</item>
+        <item name="editTextStyle">@style/MyEditText</item>
+        <item name="android:editTextStyle">@style/MyEditText</item>
+
+    </style>
 
 
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
@@ -14,4 +29,15 @@
         <item name="windowSplashScreenBackground">@color/black_background</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.EnglishWritingInViews</item>
     </style>
+
+    <style name="GreyCards" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/grey_cards</item>
+    </style>
+
+    <style name="MyEditText" parent="ThemeOverlay.Material3.TextInputEditText" >
+        <item name="background">@drawable/multi_line_text_style_night</item>
+        <item name="android:textColor">@color/white_text</item>
+    </style>
+
+
 </resources>

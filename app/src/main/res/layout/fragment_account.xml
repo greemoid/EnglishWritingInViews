@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_background"
     android:fillViewport="true"
     tools:context=".presentation.account.AccountFragment">
 
@@ -31,7 +30,6 @@
             android:layout_marginTop="@dimen/size_16dp"
             android:gravity="center"
             android:text="@string/illia_palamarchuk_todelete"
-            android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +43,6 @@
             android:layout_marginTop="@dimen/size_16dp"
             android:gravity="center"
             android:text="@string/written_texts"
-            android:textColor="@color/white_text"
             app:layout_constraintEnd_toStartOf="@+id/tv_active_days"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_nick" />
@@ -57,7 +54,6 @@
             android:layout_marginTop="@dimen/size_16dp"
             android:gravity="center"
             android:text="@string/active_days"
-            android:textColor="@color/white_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_written_texts"
             app:layout_constraintTop_toBottomOf="@+id/tv_nick" />
@@ -67,9 +63,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size_16dp"
-            android:backgroundTint="@color/grey_cards"
             android:text="@string/settings"
             android:textColor="@color/white_text"
+            android:backgroundTint="@color/grey_cards"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_written_texts" />

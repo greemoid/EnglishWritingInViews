@@ -11,4 +11,10 @@ plugins {
     alias(libs.plugins.crashlytics) apply false
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
 true // Needed to make the Suppress annotation work for the plugins block

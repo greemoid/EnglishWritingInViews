@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_background"
     android:padding="@dimen/size_32dp"
     tools:context=".presentation.strike.StrikeFragment">
 
@@ -31,7 +30,6 @@
         android:id="@+id/tv_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white_text"
         android:textSize="@dimen/text_size_18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +40,6 @@
         android:id="@+id/tv_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white_text"
         android:textSize="@dimen/text_size_18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

@@ -165,7 +165,8 @@ class LocalDataSourceTest {
 
     /*@Test
     fun `safeFlowCall should throw exception`() {
-        val block: () -> Flow<List<QuestionDbModel>> = { throw CustomDatabaseException("Error: Cannot make safe call to database") }
+        val block: () -> Flow<List<QuestionDbModel>> =
+        { throw CustomDatabaseException("Error: Cannot make safe call to database") }
 
         var exception: CustomDatabaseException? = null
 

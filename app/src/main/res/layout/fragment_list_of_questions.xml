@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_background"
     tools:context=".presentation.MainFragment">
 
 
@@ -75,8 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         tools:text="Loading"
+        android:textColor="@color/hint_color"
         android:visibility="invisible"
-        android:textColor="@color/not_primary_text"
         app:layout_constraintBottom_toBottomOf="@+id/progress_connection"
         app:layout_constraintStart_toEndOf="@+id/progress_connection"
         app:layout_constraintTop_toTopOf="@+id/progress_connection" />

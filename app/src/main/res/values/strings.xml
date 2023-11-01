@@ -34,4 +34,7 @@
     <string name="login_as_guest">Login as guest</string>
     <string name="login_with_google">Login with Google</string>
     <string name="there_are_no_any_answers">¯\\_(ツ)_/¯\nThere are no any answers</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="apply_filters">Apply Filters</string>
 </resources>
