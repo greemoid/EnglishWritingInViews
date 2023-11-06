@@ -1,18 +1,26 @@
 package com.example.englishwritinginviews.presentation.listOfQuestions
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.R
+import com.example.englishwritinginviews.data.db.entities.toDomainModel
 import com.example.englishwritinginviews.domain.FetchQuestionsUseCase
 import com.example.englishwritinginviews.domain.LivesHandler
 import com.example.englishwritinginviews.domain.QuestionDomain
 import com.example.englishwritinginviews.presentation.core.ConnectionObserver
 import com.example.englishwritinginviews.presentation.core.ResourceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -59,11 +67,21 @@ class ListOfQuestionsViewModel @Inject constructor(
     }
 
     fun getQuestions(filterList: Set<String> = emptySet()) {
-        viewModelScope.launch {
+        // there were an exception with coroutine cancellation
+        val exceptionHandler = CoroutineExceptionHandler { coroutineContext, exception ->
+            Log.d("asac", "CoroutineExceptionHandler got $exception in $coroutineContext")
+        }
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO + exceptionHandler)
+        scope.launch {
             useCase(filterList).collect { list ->
                 _questionsState.value = list
             }
         }
+        /*viewModelScope.launch {
+            useCase(filterList).collect { list ->
+                _questionsState.value = list
+            }
+        }*/
     }
 
     private fun getConnectionState() {
