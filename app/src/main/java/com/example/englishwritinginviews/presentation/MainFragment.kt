@@ -76,11 +76,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
 
 
     private fun navigateIfSignedIn() {
-        if (viewModel.currentUser != null) {
+        if (viewModel.currentUser != null)
             findNavController().navigate(R.id.action_mainFragment_to_listOfQuestionsFragment)
-        } else {
-            Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
-        }
+
     }
 
 }

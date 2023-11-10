@@ -99,6 +99,7 @@ class AnswerFragment :
                             )
                         )
                         setTextColor(resources.getColor(R.color.white_text, resources.newTheme()))
+                        setBackgroundTint(resources.getColor(R.color.grey_cards, resources.newTheme()))
                         setAction("Close") {
                             dismiss()
                         }

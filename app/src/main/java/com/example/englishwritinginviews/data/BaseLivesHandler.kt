@@ -1,6 +1,5 @@
 package com.example.englishwritinginviews.data
 
-import android.util.Log
 import com.example.englishwritinginviews.data.db.LivesSharedPreferences
 import com.example.englishwritinginviews.domain.LivesHandler
 
@@ -32,7 +31,8 @@ class BaseLivesHandler(
 
     // todo move to ui-layer
     override fun getTheSmallestTimeDiff(): String {
-        val diff = 7200000 - (System.currentTimeMillis() - livesSharedPreferences.getTheSmallestTime())
+        val diff =
+            7200000 - (System.currentTimeMillis() - livesSharedPreferences.getTheSmallestTime())
 
         val seconds = diff / 1000
         val minutes = (seconds / 60) % 60
