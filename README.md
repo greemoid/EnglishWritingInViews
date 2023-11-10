@@ -8,11 +8,17 @@ The technology and instruments stack I used in developing the application:
 - Kotlin
 - MVVM
 - ViewModel
+- Clean Architecture
 - Flow
+- Room
+- Retrofit
 - Coroutines
 - Jetpack Navigation
 - Hilt
 - Firebase authentication
+- Junit
+- MockK
+- OneSignal
 
 An example of how the application works:
 
