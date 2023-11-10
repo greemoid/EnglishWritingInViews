@@ -66,8 +66,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_32dp"
         android:backgroundTint="@color/grey_cards"
-        android:text="@string/submit"
         android:enabled="false"
+        android:text="@string/submit"
+        android:textColor="@color/white_text"
         app:layout_constraintEnd_toEndOf="@+id/et_answer"
         app:layout_constraintStart_toStartOf="@+id/et_answer"
         app:layout_constraintTop_toBottomOf="@+id/tvCounter" />

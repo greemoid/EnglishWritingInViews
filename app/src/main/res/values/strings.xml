@@ -37,4 +37,5 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="apply_filters">Apply Filters</string>
+    <string name="log_out">Log out</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.englishwritinginviews.presentation
+package com.example.englishwritinginviews.presentation.settings
 
 import androidx.lifecycle.ViewModel
 import com.example.englishwritinginviews.domain.LoginRepository
