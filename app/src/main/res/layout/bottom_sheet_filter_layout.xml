@@ -1,44 +1,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/size_32dp"
-    android:background="@color/grey_cards"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/size_32dp">
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/is_easy"
-        android:layout_margin="@dimen/size_8dp"
+        style="@style/RedCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white_text"
-        style="@style/RedCheckBox"
-        android:text="Easy" />
+        android:layout_margin="@dimen/size_8dp"
+        android:text="@string/easy"
+        android:textColor="@color/white_text" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/is_medium"
-        android:layout_margin="@dimen/size_8dp"
+        style="@style/RedCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white_text"
-        style="@style/RedCheckBox"
-        android:text="Medium" />
+        android:layout_margin="@dimen/size_8dp"
+        android:text="@string/medium"
+        android:textColor="@color/white_text" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/is_hard"
-        android:layout_margin="@dimen/size_8dp"
+        style="@style/RedCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white_text"
-        style="@style/RedCheckBox"
-        android:text="Hard" />
+        android:layout_margin="@dimen/size_8dp"
+        android:text="@string/hard"
+        android:textColor="@color/white_text" />
 
     <Button
         android:id="@+id/btn_apply"
-        android:layout_margin="@dimen/size_8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white_text"
+        android:layout_margin="@dimen/size_8dp"
         android:backgroundTint="@color/red_button"
-        android:text="Apply Filters" />
+        android:text="@string/apply_filters"
+        android:textColor="@color/white_text" />
 </LinearLayout>

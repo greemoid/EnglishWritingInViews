@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.0-alpha04"
+agp = "8.1.2"
 kotlin = "1.8.0"
 core-ktx = "1.12.0"
 junit = "4.13.2"
@@ -22,6 +22,7 @@ arch = "2.2.0"
 ksp = "1.8.0-1.0.8"
 safeargs = "2.5.1"
 services = "4.4.0"
+crashlytics = "2.9.9"
 
 [libraries]
 calendar = { group = "com.kizitonwose.calendar", name = "view", version.ref = "calendar" }
@@ -52,6 +53,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version = "20.7.0" }
+androidx-databinding-runtime = { group = "androidx.databinding", name = "databinding-runtime", version = "8.1.2" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -60,6 +62,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safeargs" }
 google-services = { id = "com.google.gms.google-services", version.ref = "services" }
+crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
 
 [bundles]
 

@@ -1,10 +1,15 @@
 package com.example.englishwritinginviews.presentation.account
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.englishwritinginviews.domain.FetchAnsweredQuestionsUseCase
 import com.example.englishwritinginviews.domain.QuestionDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -32,12 +37,23 @@ class AccountViewModel @Inject constructor(
     }
 
     private fun fetchQuestions() {
-        viewModelScope.launch {
+        // there were an exception with coroutine cancellation
+        val exceptionHandler = CoroutineExceptionHandler { coroutineContext, exception ->
+            Log.d("asac", "CoroutineExceptionHandler got $exception in $coroutineContext")
+        }
+        val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO + exceptionHandler)
+        scope.launch {
             fetchAnsweredQuestionsUseCase().collect { list ->
                 _questions.value = list.asReversed()
                 _dates.value = getSetOfDates(list)
             }
         }
+        /*viewModelScope.launch {
+            fetchAnsweredQuestionsUseCase().collect { list ->
+                _questions.value = list.asReversed()
+                _dates.value = getSetOfDates(list)
+            }
+        }*/
     }
 
     private fun getSetOfDates(list: List<QuestionDomain>): Set<LocalDate> {

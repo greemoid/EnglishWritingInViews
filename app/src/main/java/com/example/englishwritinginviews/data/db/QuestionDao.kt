@@ -32,7 +32,10 @@ interface QuestionDao {
         return getAnswerById(id)
     }
 
-    @Query("UPDATE questions SET answer = :answer, isAnswered = :isAnswered, answeredAt = :answeredAt, rating = :rating WHERE id = :id")
+    @Query("UPDATE questions SET answer = :answer, " +
+            "isAnswered = :isAnswered, " +
+            "answeredAt = :answeredAt, " +
+            "rating = :rating WHERE id = :id")
     fun updateAnswer(
         id: Int,
         answer: String,

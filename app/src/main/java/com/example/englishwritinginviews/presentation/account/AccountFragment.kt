@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -46,9 +47,16 @@ class AccountFragment :
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.questions.collect { list ->
-                    adapter.differ.submitList(list)
                     binding.tvWrittenTexts.text =
                         resources.getString(R.string.written_texts, list.size)
+                    if (list.isEmpty()) {
+                        binding.rvActivity.visibility = View.INVISIBLE
+                        binding.tvEmptyList.visibility = View.VISIBLE
+                    } else {
+                        binding.rvActivity.visibility = View.VISIBLE
+                        binding.tvEmptyList.visibility = View.INVISIBLE
+                        adapter.differ.submitList(list)
+                    }
                 }
             }
         }

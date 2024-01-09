@@ -8,6 +8,13 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.safeargs) apply false
     alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.crashlytics) apply false
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
 }
 
 true // Needed to make the Suppress annotation work for the plugins block
