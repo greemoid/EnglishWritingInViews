@@ -1,21 +1,46 @@
 package com.example.englishwritinginviews.presentation.settings
 
-import androidx.fragment.app.viewModels
-import com.example.englishwritinginviews.databinding.FragmentSettingsBinding
-import com.example.englishwritinginviews.presentation.core.BaseFragment
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class SettingsFragment :
-    BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
+class SettingsFragment : Fragment()
+/*BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate)*/ {
 
-    override fun init() {
-        val viewModel: SettingsViewModel by viewModels()
-        binding.btnSignOut.setOnClickListener {
-            viewModel.signOut()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return ComposeView(requireContext()).apply {
+            setContent {
+                Column {
+                    Text(text = "String")
+                    Button(onClick = {}) {
+                        Text(text = "Button")
+                    }
+                }
+            }
         }
     }
+    /*
+        override fun init() {
+            val viewModel: SettingsViewModel by viewModels()
+            binding.btnSignOut.setOnClickListener {
+                viewModel.signOut()
+            }
+    
+        }*/
 
 
 }

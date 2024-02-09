@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.crashlytics)
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
-    id("io.gitlab.arturbosch.detekt") version("1.23.3")
+    id("io.gitlab.arturbosch.detekt") version ("1.23.3")
 }
 
 android {
@@ -29,7 +29,11 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "API_URL", "\"https://api.languagetoolplus.com/v2/\"")
-            buildConfigField("String", "ONESIGNAL_APP_ID", "\"e3d4966d-211c-4f69-9d15-2be3e78bb4e8\"")
+            buildConfigField(
+                "String",
+                "ONESIGNAL_APP_ID",
+                "\"e3d4966d-211c-4f69-9d15-2be3e78bb4e8\""
+            )
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -38,7 +42,11 @@ android {
         }
         release {
             buildConfigField("String", "API_URL", "\"https://api.languagetoolplus.com/v2/\"")
-            buildConfigField("String", "ONESIGNAL_APP_ID", "\"e3d4966d-211c-4f69-9d15-2be3e78bb4e8\"")
+            buildConfigField(
+                "String",
+                "ONESIGNAL_APP_ID",
+                "\"e3d4966d-211c-4f69-9d15-2be3e78bb4e8\""
+            )
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -49,6 +57,10 @@ android {
 
     buildFeatures {
         buildConfig = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.1"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -78,7 +90,30 @@ android {
 
 dependencies {
 
-    implementation("io.agora.rtc:full-sdk:4.0.1")
+    // Compose todo clean up it later
+    val composeBom = platform("androidx.compose:compose-bom:2024.02.00")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    // Material Design 3
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui")
+
+    // Android Studio Preview support
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+
+    // UI Tests
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Optional - Integration with activities
+    implementation("androidx.activity:activity-compose:1.8.2")
+    // Optional - Integration with ViewModels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    // Optional - Integration with LiveData
+    implementation("androidx.compose.runtime:runtime-livedata")
+
 
     // Calendar
     implementation(libs.calendar)
