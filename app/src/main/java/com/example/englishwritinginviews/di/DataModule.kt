@@ -4,7 +4,8 @@ import android.content.Context
 import com.example.englishwritinginviews.data.BaseLivesHandler
 import com.example.englishwritinginviews.data.BaseLoginRepository
 import com.example.englishwritinginviews.data.DefaultMistakesRepository
-import com.example.englishwritinginviews.data.api.ApiService
+import com.example.englishwritinginviews.data.api.AIApiService
+import com.example.englishwritinginviews.data.api.MistakesApiService
 import com.example.englishwritinginviews.data.db.LivesSharedPreferences
 import com.example.englishwritinginviews.data.db.LocalDataSource
 import com.example.englishwritinginviews.data.db.QuestionDao
@@ -29,10 +30,11 @@ object DataModule {
     @Provides
     @Singleton
     fun provideMistakesRepository(
-        apiService: ApiService,
+        mistakesApiService: MistakesApiService,
+        aiApiService: AIApiService,
         localDataSource: LocalDataSource
     ): MistakesRepository {
-        return DefaultMistakesRepository(apiService, localDataSource)
+        return DefaultMistakesRepository(mistakesApiService, aiApiService, localDataSource)
     }
 
     @Provides

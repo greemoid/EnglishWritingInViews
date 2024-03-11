@@ -8,12 +8,16 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.englishwritinginviews.R
 import com.example.englishwritinginviews.databinding.FragmentAnswerBinding
+import com.example.englishwritinginviews.domain.Mistake
 import com.example.englishwritinginviews.presentation.core.BaseFragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +43,30 @@ class AnswerFragment :
             findNavController().navigate(R.id.action_answerFragment_to_listOfQuestionsFragment)
         }
 
+        binding.btnAi.setOnClickListener {
+            openBottomSheetAi(question.answer)
+        }
+
         fetchData(question.answer)
+    }
+
+    private fun openBottomSheetAi(answer: String) {
+        val dialog = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_ai_answer, null)
+        val tv = view.findViewById<TextView>(R.id.tv_response)
+
+        dialog.setCancelable(true)
+        dialog.setContentView(view)
+        dialog.show()
+
+        viewModel.fetchAIResponse(answer)
+
+        // todo ai ui-state
+        viewModel.aiState.observe(viewLifecycleOwner) { state ->
+            tv.setText(state.response)
+            if (state.isError) tv.setTextColor(Color.RED)
+            if (state.isLoading) tv.setText("Loading...")
+        }
     }
 
     private fun fetchData(answer: String) {

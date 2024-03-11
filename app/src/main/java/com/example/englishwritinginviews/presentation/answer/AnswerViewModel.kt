@@ -1,10 +1,10 @@
 package com.example.englishwritinginviews.presentation.answer
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.englishwritinginviews.domain.FetchAIResponseUseCase
 import com.example.englishwritinginviews.domain.FetchMistakesUseCase
 import com.example.englishwritinginviews.domain.LivesHandler
 import com.example.englishwritinginviews.domain.Mistake
@@ -12,7 +12,6 @@ import com.example.englishwritinginviews.domain.QuestionDomain
 import com.example.englishwritinginviews.domain.UpdateAnswerUseCase
 import com.example.englishwritinginviews.domain.WorkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -27,24 +26,87 @@ data class AnswerUiState(
     val isError: Boolean = false
 )
 
+data class AIUiState(
+    val response: String,
+    val isLoading: Boolean,
+    val isError: Boolean
+)
+
 @HiltViewModel
 class AnswerViewModel @Inject constructor(
     private val fetchMistakesUseCase: FetchMistakesUseCase,
     private val updateAnswerUseCase: UpdateAnswerUseCase,
+    private val fetchAIResponseUseCase: FetchAIResponseUseCase,
     private val livesHandler: LivesHandler
 ) : ViewModel() {
 
     private val _uiState: MutableLiveData<AnswerUiState> = MutableLiveData()
     val uiState: LiveData<AnswerUiState> = _uiState
 
+    private val _aiState: MutableLiveData<AIUiState> = MutableLiveData()
+    val aiState: LiveData<AIUiState> = _aiState
+
+    private var mistakes = emptyList<Mistake>()
+
+
     private var _stateFlow: MutableStateFlow<QuestionDomain> =
-        MutableStateFlow(QuestionDomain(0, "question", "answer", "difficulty", "color", false, 1, 0.0))
+        MutableStateFlow(
+            QuestionDomain(
+                0,
+                "question",
+                "answer",
+                "difficulty",
+                "color",
+                false,
+                1,
+                0.0
+            )
+        )
     val stateFlow: StateFlow<QuestionDomain> = _stateFlow
 
     fun update(id: Int, answer: String, rating: Float) {
         viewModelScope.launch {
             val currentDate = System.currentTimeMillis()
             _stateFlow.value = updateAnswerUseCase(id, answer, currentDate, rating)
+        }
+    }
+
+    fun fetchAIResponse(answer: String) {
+        val prompt =
+            "I wrote a text and get mistakes from my teacher. So, I want to get detailed explanation for this mistakes from you" + mistakes.toString() + answer
+        viewModelScope.launch {
+            _aiState.value = AIUiState(
+                response = "",
+                isLoading = false,
+                isError = false
+            )
+            fetchAIResponseUseCase(prompt).collect { workResult ->
+                when (workResult) {
+                    is WorkResult.Success -> {
+                        _aiState.value = AIUiState(
+                            response = workResult.data ?: "",
+                            isError = false,
+                            isLoading = false
+                        )
+                    }
+
+                    is WorkResult.Error -> {
+                        _aiState.value = AIUiState(
+                            response = workResult.message ?: "",
+                            isError = true,
+                            isLoading = false
+                        )
+                    }
+
+                    is WorkResult.Loading -> {
+                        _aiState.value = AIUiState(
+                            response = "",
+                            isError = false,
+                            isLoading = true
+                        )
+                    }
+                }
+            }
         }
     }
 
@@ -62,7 +124,7 @@ class AnswerViewModel @Inject constructor(
         fetchMistakesUseCase(answer).collect { workResult ->
             when (workResult) {
                 is WorkResult.Success -> {
-                    val mistakes = workResult.data ?: emptyList()
+                    mistakes = workResult.data ?: emptyList()
                     val rating = calculateRating(mistakes)
 
                     _uiState.value = AnswerUiState(
@@ -110,7 +172,6 @@ class AnswerViewModel @Inject constructor(
             else -> 0.5f
         }
     }
-
 
 
 }

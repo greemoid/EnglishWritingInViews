@@ -1,5 +1,6 @@
 package com.example.englishwritinginviews.di
 
+import com.example.englishwritinginviews.domain.FetchAIResponseUseCase
 import com.example.englishwritinginviews.domain.FetchAnsweredQuestionsUseCase
 import com.example.englishwritinginviews.domain.FetchMistakesUseCase
 import com.example.englishwritinginviews.domain.FetchQuestionsUseCase
@@ -37,5 +38,11 @@ object DomainModule {
     @Singleton
     fun provideFetchAnsweredQuestionsUseCase(mistakesRepository: MistakesRepository): FetchAnsweredQuestionsUseCase {
         return FetchAnsweredQuestionsUseCase(mistakesRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFetchAIResponseUseCase(mistakesRepository: MistakesRepository): FetchAIResponseUseCase {
+        return FetchAIResponseUseCase(mistakesRepository)
     }
 }

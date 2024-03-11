@@ -1,5 +1,6 @@
 package com.example.englishwritinginviews.domain
 
+import com.example.englishwritinginviews.data.api.entities.ai.AIResponse
 import kotlinx.coroutines.flow.Flow
 
 interface MistakesRepository {
@@ -10,5 +11,7 @@ interface MistakesRepository {
     fun getAnsweredQuestions(): Flow<List<QuestionDomain>>
 
     fun updateAnswer(id: Int, answer: String, answeredAt: Long, rating: Float): QuestionDomain
+
+    suspend fun fetchAIResponse(prompt: String): Flow<WorkResult<String>>
 
 }
